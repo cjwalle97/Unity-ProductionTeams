@@ -5,21 +5,31 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour {
 
     public Enemy EnemyConfig;
-
+    [HideInInspector]
+    public Enemy _other;
+    
+    private Vector3 Position;
 
 	// Use this for initialization
 	void Start () {
-		
+        Position = gameObject.transform.localPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-    public void SeekTarget()
-    {
-
+        if(EnemyConfig.Health <= 0)
+        {
+            EnemyConfig.Alive = false;
+        }
+        CheckIfAlive();
+        gameObject.transform.localPosition = Position;
     }
 
+    public void CheckIfAlive()
+    {
+        if(EnemyConfig.Alive == false)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4729791562237620, guid: 739fde82924843545b036d400fd5aa59, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4729791562237620, guid: 739fde82924843545b036d400fd5aa59, type: 2}
       propertyPath: m_LocalPosition.y
@@ -297,13 +297,46 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1497989194}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.6830127, y: -0.18301266, z: 0.18301266, w: 0.6830127}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -30, z: 0}
+--- !u!1 &1598455579 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1635098221838622, guid: 739fde82924843545b036d400fd5aa59,
+    type: 2}
+  m_PrefabInternal: {fileID: 1375359990}
+--- !u!114 &1598455580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1598455579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda1e820e5e903f4e8968848f5adb743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyConfig: {fileID: 11400000, guid: b7114c7de8e4ec44481ec59b7da100fd, type: 2}
+  _other: {fileID: 0}
+--- !u!54 &1598455585
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1598455579}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1732781577
 GameObject:
   m_ObjectHideFlags: 0
