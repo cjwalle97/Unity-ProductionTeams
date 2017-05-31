@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour {
 
-    public NavMeshAgent NavAgent;
-    public GameObject Target;
+    public NavMeshAgent Agent;
+    public Transform Target;
     public Enemy EnemyConfig;
     [HideInInspector]
     public Enemy _other;
@@ -20,12 +20,12 @@ public class EnemyBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(EnemyConfig.Health <= 0)
+        CheckIfAlive();
+        if (EnemyConfig.Health <= 0)
         {
             EnemyConfig.Alive = false;
         }
-        CheckIfAlive();
-        gameObject.transform.localPosition = Position;
+        Agent.SetDestination(Target.position);
     }
 
     public void CheckIfAlive()
