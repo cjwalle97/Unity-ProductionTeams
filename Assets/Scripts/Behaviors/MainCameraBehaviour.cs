@@ -6,6 +6,10 @@ public class MainCameraBehaviour : MonoBehaviour {
 
     private Transform _playertransform;
     private Camera _maincamera;
+    public float camY = 12;
+    public float camZ = -6;
+    public float ang = 0;
+
 	// Use this for initialization
 	void Start () {
         _playertransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -23,9 +27,9 @@ public class MainCameraBehaviour : MonoBehaviour {
     private void FixedUpdate()
     {
         Vector3 offset = _playertransform.position;
-        Vector3 calc_offset = new Vector3(0, 12, -6);
+        Vector3 calc_offset = new Vector3(0, camY, camZ);
         offset += calc_offset;
         _maincamera.transform.position = offset;
-        _maincamera.transform.rotation = Quaternion.AngleAxis(45, Vector3.right);
+        _maincamera.transform.rotation = Quaternion.AngleAxis(ang, Vector3.right);
     }
 }

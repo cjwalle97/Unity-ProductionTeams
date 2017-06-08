@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [HideInInspector]
+    public Player _player;
 
-    
-        
-    public Player Player;
+    public float PlayerHealth = 100;
+    public float PlayerDamage = 25;
     public GameObject Ammunition;
     public float MovementSpeed = 20;
     public float LookSpeed = 10;
@@ -18,7 +19,11 @@ public class PlayerBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _player = ScriptableObject.CreateInstance<Player>();
         _bulletspawn = GetComponentInChildren<Transform>();
+        _player.Health = PlayerHealth;
+        _player.Damage = PlayerDamage;
+        _player.Alive = true;
     }
 
     Vector3 LookAround()
@@ -40,15 +45,29 @@ public class PlayerBehaviour : MonoBehaviour
 
         return _direction.normalized;
     }
-
-
+    public float shotCooldown = 1f;
     void Shoot()
     {
+        StartCoroutine(ShotCooldown(shotCooldown));
+    }
+
+    //RESEARCH THIS
+    IEnumerator ShotCooldown(float timer)
+    {
+        if (shooting)
+            yield return null;
+        shooting = true;
+        var countdown = timer;
         var _bullet = Instantiate(Ammunition, _bulletspawn.position, _bulletspawn.localRotation);
         _bullet.GetComponent<Rigidbody>().velocity += _bulletspawn.forward * BulletSpeed;
         Destroy(_bullet, 2.0f);
+        while (countdown >= 0)
+        {
+            countdown -= Time.deltaTime;
+            yield return null;
+        }
+        shooting = false;
     }
-
 
     // Update is called once per frame
     void Update()
@@ -64,36 +83,39 @@ public class PlayerBehaviour : MonoBehaviour
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
         
     }
-
+    bool canshoot, shooting;
     void FixedUpdate()
     {
-        transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;       
+        var _rightTrigger = Input.GetAxis("JoyFire");
+        
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
         }
 
-        if(Input.GetButtonDown("JoyFire"))
-        {
+        //RESEARCH THIS
+        canshoot = _rightTrigger >= .5f;        
+        if(canshoot && !shooting)
+        {            
             Shoot();
         }
 
-        if(MoveAround() != Vector3.zero)
+        if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
         {
-            if(LookAround() == Vector3.zero)
+            if(LookAround() == Vector3.zero) //CHECK IF THE PLAYER IS AIMING
             {
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
             }
         }
 
-
         if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);            
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
         }
 
+        transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;
 
+        //transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
     }
-
 }

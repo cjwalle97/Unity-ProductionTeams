@@ -429,9 +429,10 @@ GameObject:
   - component: {fileID: 95936127745328470}
   - component: {fileID: 114409931048838534}
   - component: {fileID: 195820627536516090}
+  - component: {fileID: 136232330825712230}
   m_Layer: 0
   m_Name: PlayerAttacker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1731,6 +1732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda1e820e5e903f4e8968848f5adb743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 100
+  Damage: 10
   TargetTag: Player
   Agent: {fileID: 195820627536516090}
   EnemyConfig: {fileID: 11400000, guid: b7114c7de8e4ec44481ec59b7da100fd, type: 2}
@@ -1738,6 +1741,19 @@ MonoBehaviour:
   ShootingPoint: {fileID: 0}
   BulletSpeed: 0
   otherAmmo: {fileID: 0}
+--- !u!136 &136232330825712230
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1427442258231958}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.43
+  m_Height: 3.78
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.75, z: -0.2}
 --- !u!137 &137196739871189610
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
