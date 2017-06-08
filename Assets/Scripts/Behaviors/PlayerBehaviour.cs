@@ -13,7 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float BulletSpeed = 20;
 
     private Transform _bulletspawn;
-    private float _speed = 20;
+    private float _speed = 6;
 
     // Use this for initialization
     void Start()
@@ -23,13 +23,24 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 LookAround()
     {
-        var _hori = Input.GetAxis("HorizontalArrow");
-        var _vert = Input.GetAxis("VerticalArrow");
+        var _hori = Input.GetAxis("HorizontalRightJoy");
+        var _vert = Input.GetAxis("VerticalRightJoy");
 
         Vector3 _direction = new Vector3(_hori, 0, _vert);
 
         return _direction.normalized;
     }
+
+    Vector3 MoveAround()
+    {
+        var h = Input.GetAxis("HorizontalLeftJoy");
+        var v = Input.GetAxis("VerticalLeftJoy");
+
+        Vector3 _direction = new Vector3(h, 0, v);
+
+        return _direction.normalized;
+    }
+
 
     void Shoot()
     {
@@ -51,26 +62,38 @@ public class PlayerBehaviour : MonoBehaviour
 
         //transform.position += new Vector3(h, 0, v);
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-
         
     }
 
     void FixedUpdate()
     {
-        var h = Input.GetAxis("Horizontal");
-        var v = Input.GetAxis("Vertical");
-
-        transform.localPosition += new Vector3(h, 0, v) * _speed * Time.deltaTime;
+        transform.localPosition += MoveAround() * _speed * Time.deltaTime;       
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
         }
 
+        if(Input.GetButtonDown("JoyFire"))
+        {
+            Shoot();
+        }
+
+        if(MoveAround() != Vector3.zero)
+        {
+            if(LookAround() == Vector3.zero)
+            {
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
+            }
+        }
+
+
         if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);            
         }
+
+
     }
 
 }
