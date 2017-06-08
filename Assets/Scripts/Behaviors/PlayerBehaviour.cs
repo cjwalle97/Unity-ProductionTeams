@@ -9,11 +9,11 @@ public class PlayerBehaviour : MonoBehaviour
         
     public Player Player;
     public GameObject Ammunition;
+    public float MovementSpeed = 20;
     public float LookSpeed = 10;
     public float BulletSpeed = 20;
 
-    private Transform _bulletspawn;
-    private float _speed = 6;
+    private Transform _bulletspawn;   
 
     // Use this for initialization
     void Start()
@@ -67,7 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.localPosition += MoveAround() * _speed * Time.deltaTime;       
+        transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;       
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
