@@ -8,4 +8,5 @@ public class Enemy : ScriptableObject {
     public float Health;
     public float Damage;
     public bool Alive;
+    public bool Attacker;
 }
