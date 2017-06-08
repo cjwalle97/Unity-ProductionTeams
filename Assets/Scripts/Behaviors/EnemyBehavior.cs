@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    public float Health = 100;
+    public float Damage = 10;
     public string TargetTag;
     public NavMeshAgent Agent;
     public Enemy EnemyConfig;
@@ -22,6 +24,10 @@ public class EnemyBehavior : MonoBehaviour
     {
         ShootingPoint = GetComponentInChildren<Transform>();
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
+        EnemyConfig = ScriptableObject.CreateInstance<Enemy>();
+        EnemyConfig.Health = Health;
+        EnemyConfig.Damage = Damage;
+        EnemyConfig.Alive = true;
     }
 
     // Update is called once per frame

@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af9cb7c14438a674bbd517c6c2cf0d37, type: 3}
-  m_Name: PlayerAttacker
+  m_Script: {fileID: 11500000, guid: 933a081e67fc96d439c53f99490011e8, type: 3}
+  m_Name: Basic_Player
   m_EditorClassIdentifier: 
-  Alive: 1
-  Attacker: 1
+  Name: Player
+  Alive: 0
