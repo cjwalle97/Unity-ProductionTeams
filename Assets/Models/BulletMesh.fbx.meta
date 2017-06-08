@@ -1,15 +1,36 @@
 fileFormatVersion: 2
-guid: c45229d254bccfe45a206fc93d6de179
-timeCreated: 1496420563
+guid: cd661d7c20989f946824896f80b74496
+timeCreated: 1496432632
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: group
+    100004: pasted__pSphere1
+    100006: pasted__pSphere1 1
+    100008: polySurface1
+    100010: polySurface2
+    100012: pSphere1
+    100014: transform1
+    100016: transform2
+    100018: transform3
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: pCube68
+    400002: group
+    400004: pasted__pSphere1
+    400006: pasted__pSphere1 1
+    400008: polySurface1
+    400010: polySurface2
+    400012: pSphere1
+    400014: transform1
+    400016: transform2
+    400018: transform3
+    2300000: polySurface1
+    2300002: polySurface2
+    3300000: polySurface1
+    3300002: polySurface2
+    4300000: polySurface1
+    4300002: polySurface2
     9500000: //RootNode
   materials:
     importMaterials: 1
