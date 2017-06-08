@@ -1,38 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-
+    public string TargetTag;
     public NavMeshAgent Agent;
-    public Transform Target;
     public Enemy EnemyConfig;
     public GameObject Ammo;
-    public GameObject ShootingPoint;
+    public Transform ShootingPoint;
+    public float BulletSpeed;
     [HideInInspector]
     public GameObject otherAmmo;
+
+    private Transform Target;
 
     // Use this for initialization
     void Start()
     {
-
+        ShootingPoint = GetComponentInChildren<Transform>();
+        Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckIfAlive();
+        Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
         if (EnemyConfig.Health <= 0)
         {
             EnemyConfig.Alive = false;
         }
+        CheckIfAlive();
         Agent.SetDestination(Target.position);
-        //if (EnemyConfig.Attacker == true)
-        //{
-        //    Shoot();
-        //}
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
     }
 
     public void CheckIfAlive()
@@ -45,9 +50,9 @@ public class EnemyBehavior : MonoBehaviour
 
     public void Shoot()
     {
-        otherAmmo = Instantiate(Ammo);
-        otherAmmo.transform.position = ShootingPoint.transform.position;
-        Destroy(otherAmmo, 2f);
+        otherAmmo = Instantiate(Ammo, ShootingPoint.position, ShootingPoint.rotation);
+        otherAmmo.GetComponent<Rigidbody>().velocity += ShootingPoint.forward * BulletSpeed;
+        Destroy(otherAmmo, 5f);
     }
 
 }

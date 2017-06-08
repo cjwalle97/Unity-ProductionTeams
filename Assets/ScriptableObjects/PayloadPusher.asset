@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: PayloadPusher
   m_EditorClassIdentifier: 
   Health: 20
-  Damage: 1
+  Damage: 0
   Alive: 1
-  Target: {fileID: 0}
+  Attacker: 0

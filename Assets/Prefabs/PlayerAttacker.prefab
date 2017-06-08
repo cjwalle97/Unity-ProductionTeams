@@ -1731,11 +1731,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda1e820e5e903f4e8968848f5adb743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetTag: Player
   Agent: {fileID: 195820627536516090}
-  Target: {fileID: 0}
   EnemyConfig: {fileID: 11400000, guid: b7114c7de8e4ec44481ec59b7da100fd, type: 2}
   Ammo: {fileID: 1741068848616158, guid: 88fecfa2a7fd59a449c482df7772c0c0, type: 2}
   ShootingPoint: {fileID: 0}
+  BulletSpeed: 0
   otherAmmo: {fileID: 0}
 --- !u!137 &137196739871189610
 SkinnedMeshRenderer:
