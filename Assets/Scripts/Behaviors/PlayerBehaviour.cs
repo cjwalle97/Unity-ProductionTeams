@@ -47,8 +47,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 MoveAround()
     {
-        var h = Input.GetAxis("HorizontalLeftJoy");
-        var v = Input.GetAxis("VerticalLeftJoy");
+        //var h = Input.GetAxis("HorizontalLeftJoy");
+        //var v = Input.GetAxis("VerticalLeftJoy");
+
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
 
         //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
         //_animator.SetFloat("WalkMovement", Mathf.Abs(v));
