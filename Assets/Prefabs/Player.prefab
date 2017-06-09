@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 23401393074344826}
   - component: {fileID: 54037582396909866}
   - component: {fileID: 114518639714385094}
+  - component: {fileID: 195854106881005900}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -223,7 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Ammunition: {fileID: 1651444318728354, guid: 3143a047c690ff64b9134458d1e8b618, type: 2}
-  LookSpeed: 20
+  MovementSpeed: 20
+  LookSpeed: 10
   BulletSpeed: 20
 --- !u!136 &136724806044070732
 CapsuleCollider:
@@ -238,3 +240,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &195854106881005900
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1383480504080364}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
