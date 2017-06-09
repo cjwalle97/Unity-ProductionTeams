@@ -14,13 +14,15 @@ public class PlayerBehaviour : MonoBehaviour
     public float LookSpeed = 10;
     public float BulletSpeed = 20;
 
-    private Transform _bulletspawn;   
+    private Transform _bulletspawn;
+    private Animator _animator;
 
     // Use this for initialization
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _player = ScriptableObject.CreateInstance<Player>();
-        _bulletspawn = GetComponentInChildren<Transform>();
+        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         _player.Health = PlayerHealth;
         _player.Damage = PlayerDamage;
         _player.Alive = true;
@@ -30,6 +32,13 @@ public class PlayerBehaviour : MonoBehaviour
     {
         var _hori = Input.GetAxis("HorizontalRightJoy");
         var _vert = Input.GetAxis("VerticalRightJoy");
+
+        //_animator.SetFloat("AimMovement", Mathf.Abs(_hori));
+        //_animator.SetFloat("AimMovement", Mathf.Abs(_vert));
+
+        _animator.SetFloat("AimMovement", Mathf.Abs(_hori) + Mathf.Abs(_vert));
+
+        Debug.Log(_hori);
 
         Vector3 _direction = new Vector3(_hori, 0, _vert);
 
@@ -41,15 +50,31 @@ public class PlayerBehaviour : MonoBehaviour
         var h = Input.GetAxis("HorizontalLeftJoy");
         var v = Input.GetAxis("VerticalLeftJoy");
 
+        //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
+        //_animator.SetFloat("WalkMovement", Mathf.Abs(v));
+
+        _animator.SetFloat("WalkMovement", Mathf.Abs(h) + Mathf.Abs(v));
+
         Vector3 _direction = new Vector3(h, 0, v);
 
         return _direction.normalized;
     }
+
     public float shotCooldown = 1f;
     void Shoot()
     {
         StartCoroutine(ShotCooldown(shotCooldown));
     }
+
+    bool CheckIfAlive()
+    {
+        if(_player.Alive)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     //RESEARCH THIS
     IEnumerator ShotCooldown(float timer)
@@ -71,7 +96,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {  
+    {
+        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         //SETUP MOVEMENT
         //SETUP CAMERA FOR PLAYER
         //var h = Input.GetAxis("Horizontal");
@@ -81,9 +107,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         //transform.position += new Vector3(h, 0, v);
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-        
+
+
+
+
     }
+
     bool canshoot, shooting;
+
     void FixedUpdate()
     {
         var _rightTrigger = Input.GetAxis("JoyFire");
@@ -97,7 +128,7 @@ public class PlayerBehaviour : MonoBehaviour
         //RESEARCH THIS
         canshoot = _rightTrigger >= .5f;        
         if(canshoot && !shooting)
-        {            
+        {      
             Shoot();
         }
 
