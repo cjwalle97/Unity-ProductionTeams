@@ -97,7 +97,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
+        //_bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         //SETUP MOVEMENT
         //SETUP CAMERA FOR PLAYER
         //var h = Input.GetAxis("Horizontal");
@@ -107,10 +107,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         //transform.position += new Vector3(h, 0, v);
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-
-
-
-
     }
 
     bool canshoot, shooting;
