@@ -14,26 +14,27 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject Ammo;
     public float BulletSpeed;
     public Animator EnemyAnimator;
+    public Transform _location;
     [HideInInspector]
     public GameObject otherAmmo;
-    public Vector3 _location = new Vector3(2f, 2f, 0f);
 
     private Transform Target;
-    
+
 
     // Use this for initialization
     void Start()
     {
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
-        EnemyConfig = ScriptableObject.CreateInstance<Enemy>();
         EnemyConfig.Health = Health;
         EnemyConfig.Damage = Damage;
         EnemyConfig.Alive = true;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
         if (Health <= 0)
         {
@@ -41,17 +42,16 @@ public class EnemyBehavior : MonoBehaviour
         }
         CheckIfAlive();
         Agent.SetDestination(Target.position);
-       
-            if (Agent.remainingDistance > Agent.stoppingDistance)
-            {
-                EnemyAnimator.SetBool("Player in Range", false);
+        if (Agent.remainingDistance > Agent.stoppingDistance)
+        {
+            EnemyAnimator.SetBool("Player in Range", false);
 
-            }
-            else
-            {
-                Shoot();
-            }
-        
+        }
+        else
+        {
+            Shoot();
+        }
+
     }
 
     public void CheckIfAlive()
@@ -66,7 +66,7 @@ public class EnemyBehavior : MonoBehaviour
     public void Shoot()
     {
         EnemyAnimator.SetBool("Player in Range", true);
-        otherAmmo = Instantiate(Ammo, gameObject.transform.localPosition + _location, gameObject.transform.localRotation);
+        otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
         otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
         Destroy(otherAmmo, 5f);
     }
