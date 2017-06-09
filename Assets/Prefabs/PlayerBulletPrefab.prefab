@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 136804933504502816}
   - component: {fileID: 114554401993468080}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: PlayerBulletPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
