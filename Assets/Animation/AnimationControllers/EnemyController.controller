@@ -12,7 +12,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: Player in Range
     m_Type: 4
@@ -323,7 +323,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours:
   - {fileID: 114479715594298918}
   m_AnyStatePosition: {x: -84, y: 12, z: 0}
-  m_EntryPosition: {x: 12, y: 96, z: 0}
+  m_EntryPosition: {x: -48, y: 156, z: 0}
   m_ExitPosition: {x: 732, y: 144, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102672623010886816}
