@@ -10,6 +10,6 @@ public interface IDamager
 
 public interface IDamageable
 {
-    void TakeDamage(float damage);
+
     float Health { get; set; }
 }
