@@ -12,53 +12,65 @@ public class EnemyBehavior : MonoBehaviour
     public NavMeshAgent Agent;
     public Enemy EnemyConfig;
     public GameObject Ammo;
-    public Transform ShootingPoint;
     public float BulletSpeed;
+    public Animator EnemyAnimator;
+    public Transform _location;
     [HideInInspector]
     public GameObject otherAmmo;
 
     private Transform Target;
 
+
     // Use this for initialization
     void Start()
     {
-        ShootingPoint = GetComponentInChildren<Transform>();
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
-        EnemyConfig = ScriptableObject.CreateInstance<Enemy>();
         EnemyConfig.Health = Health;
         EnemyConfig.Damage = Damage;
         EnemyConfig.Alive = true;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
-        if (EnemyConfig.Health <= 0)
+        if (Health <= 0)
         {
             EnemyConfig.Alive = false;
         }
         CheckIfAlive();
         Agent.SetDestination(Target.position);
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Agent.remainingDistance > Agent.stoppingDistance)
+        {
+            EnemyAnimator.SetBool("Player in Range", false);
+
+        }
+        else
         {
             Shoot();
         }
+
     }
 
     public void CheckIfAlive()
     {
         if (EnemyConfig.Alive == false)
         {
-            Destroy(gameObject);
+            EnemyAnimator.SetBool("Alive", EnemyConfig.Alive);
+            Destroy(gameObject, 5f);
         }
     }
 
     public void Shoot()
     {
-        otherAmmo = Instantiate(Ammo, ShootingPoint.position, ShootingPoint.rotation);
-        otherAmmo.GetComponent<Rigidbody>().velocity += ShootingPoint.forward * BulletSpeed;
+        EnemyAnimator.SetBool("Player in Range", true);
+        otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
+        otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
         Destroy(otherAmmo, 5f);
     }
+
+
 
 }
