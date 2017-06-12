@@ -30,11 +30,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 LookAround()
     {
-        //var _hori = Input.GetAxis("HorizontalRightJoy");
-        //var _vert = Input.GetAxis("VerticalRightJoy");
+        //RIGHT JOYSTICK CONTROLL
+        var _hori = Input.GetAxis("HorizontalRightJoy");
+        var _vert = Input.GetAxis("VerticalRightJoy");
 
-        var _hori = Input.GetAxis("HorizontalArrow");
-        var _vert = Input.GetAxis("VerticalArrow");
+        //ARROW CONTROLLS
+        //var _hori = Input.GetAxis("HorizontalArrow");
+        //var _vert = Input.GetAxis("VerticalArrow");
 
         //_animator.SetFloat("AimMovement", Mathf.Abs(_hori));
         //_animator.SetFloat("AimMovement", Mathf.Abs(_vert));
@@ -50,11 +52,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 MoveAround()
     {
-        //var h = Input.GetAxis("HorizontalLeftJoy");
-        //var v = Input.GetAxis("VerticalLeftJoy");
+        //LEFT JOYSTICK CONTROLL
+        var h = Input.GetAxis("HorizontalLeftJoy");
+        var v = Input.GetAxis("VerticalLeftJoy");
 
-        var h = Input.GetAxis("Horizontal");
-        var v = Input.GetAxis("Vertical");
+        //WSAD CONTROLL
+        //var h = Input.GetAxis("Horizontal");
+        //var v = Input.GetAxis("Vertical");
 
         //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
         //_animator.SetFloat("WalkMovement", Mathf.Abs(v));

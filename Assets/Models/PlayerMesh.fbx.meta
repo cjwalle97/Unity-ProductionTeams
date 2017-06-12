@@ -265,7 +265,7 @@ ModelImporter:
     13700040: ProtagGun4FINAL:RifleBody
     13700042: ProtagGun4FINAL:Scope1
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
