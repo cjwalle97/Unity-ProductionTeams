@@ -1,21 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    #region //MEMEBER VARIABLES
     [HideInInspector]
     public Player _player;
-
     public float PlayerHealth = 100;
     public float PlayerDamage = 25;
     public GameObject Ammunition;
     public float MovementSpeed = 20;
     public float LookSpeed = 10;
     public float BulletSpeed = 20;
-
     private Transform _bulletspawn;
     private Animator _animator;
+
+    //SETUP EVENT FOR PLAYER HEALTH CHANGE
+    [System.Serializable]
+    public class OnPlayerHealthChange : UnityEvent<float> { }
+    public OnPlayerHealthChange onPlayerHealthChange;
+    #endregion
+    
 
     // Use this for initialization
     void Start()
@@ -53,12 +60,12 @@ public class PlayerBehaviour : MonoBehaviour
     Vector3 MoveAround()
     {
         //LEFT JOYSTICK CONTROLL
-        var h = Input.GetAxis("HorizontalLeftJoy");
-        var v = Input.GetAxis("VerticalLeftJoy");
+        //var h = Input.GetAxis("HorizontalLeftJoy");
+        //var v = Input.GetAxis("VerticalLeftJoy");
 
         //WSAD CONTROLL
-        //var h = Input.GetAxis("Horizontal");
-        //var v = Input.GetAxis("Vertical");
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
 
         //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
         //_animator.SetFloat("WalkMovement", Mathf.Abs(v));
@@ -84,7 +91,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
         return false;
     }
-
 
     //RESEARCH THIS
     IEnumerator ShotCooldown(float timer)
