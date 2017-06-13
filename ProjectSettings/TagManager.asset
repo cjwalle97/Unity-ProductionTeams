@@ -7,6 +7,13 @@ TagManager:
   - Enemy
   - PayloadPusher
   - Payload
+  - ButtonPanel
+  - PlayerHealth
+  - TowerHealth
+  - GameInfoPanel
+  - RoundTimer
+  - EnemyCounter
+  - RoundCounter
   layers:
   - Default
   - TransparentFX

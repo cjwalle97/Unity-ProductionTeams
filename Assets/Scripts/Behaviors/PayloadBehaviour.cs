@@ -29,7 +29,7 @@ public class PayloadBehaviour : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        _route.speed = PusherEffort;
+        _route.acceleration = PusherEffort;
     }
 
     private void OnTriggerEnter(Collider other)

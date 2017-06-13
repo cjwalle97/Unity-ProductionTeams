@@ -45,7 +45,7 @@ ModelImporter:
     13700006: Turretbase
     13700008: Turrethead
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
