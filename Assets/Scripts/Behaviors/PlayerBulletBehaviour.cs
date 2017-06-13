@@ -13,15 +13,17 @@ public class PlayerBulletBehaviour : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
     {
+        
         if(other.tag == "Enemy")
         {
-            other.GetComponent<EnemyBehavior>().EnemyConfig.TakeDamage(_player.Damage);
+            Debug.Log("ENEMYCollision");
+            _player.DoDamage(other.GetComponent<EnemyBehavior>().EnemyConfig);
             Destroy(gameObject);
         }
 
         if(other.tag == "PayloadPusher")
         {
-            other.GetComponent<EnemyBehavior>().EnemyConfig.TakeDamage(_player.Damage);
+            _player.DoDamage(other.GetComponent<PayloadPusherBehaviour>().Pusher);
             Destroy(gameObject);
         }
     }

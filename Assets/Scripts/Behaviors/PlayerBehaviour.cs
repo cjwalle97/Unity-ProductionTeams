@@ -30,15 +30,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 LookAround()
     {
-        var _hori = Input.GetAxis("HorizontalRightJoy");
-        var _vert = Input.GetAxis("VerticalRightJoy");
+        //var _hori = Input.GetAxis("HorizontalRightJoy");
+        //var _vert = Input.GetAxis("VerticalRightJoy");
+
+        var _hori = Input.GetAxis("HorizontalArrow");
+        var _vert = Input.GetAxis("VerticalArrow");
 
         //_animator.SetFloat("AimMovement", Mathf.Abs(_hori));
         //_animator.SetFloat("AimMovement", Mathf.Abs(_vert));
 
         _animator.SetFloat("AimMovement", Mathf.Abs(_hori) + Mathf.Abs(_vert));
 
-        Debug.Log(_hori);
+        //Debug.Log(_hori);
 
         Vector3 _direction = new Vector3(_hori, 0, _vert);
 
@@ -47,8 +50,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 MoveAround()
     {
-        var h = Input.GetAxis("HorizontalLeftJoy");
-        var v = Input.GetAxis("VerticalLeftJoy");
+        //var h = Input.GetAxis("HorizontalLeftJoy");
+        //var v = Input.GetAxis("VerticalLeftJoy");
+
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
 
         //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
         //_animator.SetFloat("WalkMovement", Mathf.Abs(v));
@@ -97,7 +103,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
+        //_bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         //SETUP MOVEMENT
         //SETUP CAMERA FOR PLAYER
         //var h = Input.GetAxis("Horizontal");
@@ -107,18 +113,15 @@ public class PlayerBehaviour : MonoBehaviour
 
         //transform.position += new Vector3(h, 0, v);
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-
-
-
-
+        _animator.SetBool("Alive", CheckIfAlive());
     }
-
     bool canshoot, shooting;
 
     void FixedUpdate()
     {
         var _rightTrigger = Input.GetAxis("JoyFire");
-        
+
+        _animator.SetBool("Shooting", shooting);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

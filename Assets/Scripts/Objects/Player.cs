@@ -15,9 +15,5 @@ public class Player : ScriptableObject, IDamageable, IDamager
     {
         damageable.Health -= Damage;
     }
-
-    public void TakeDamage(float damage)
-    {
-        Health -= damage;
-    }
+    
 }
