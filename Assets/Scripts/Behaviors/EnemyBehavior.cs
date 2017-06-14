@@ -36,7 +36,7 @@ public class EnemyBehavior : MonoBehaviour
     {
 
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
-        if (Health <= 0)
+        if (EnemyConfig.Health <= 0)
         {
             EnemyConfig.Alive = false;
         }
@@ -44,7 +44,7 @@ public class EnemyBehavior : MonoBehaviour
         Agent.SetDestination(Target.position);
         if (Agent.remainingDistance > Agent.stoppingDistance)
         {
-            EnemyAnimator.SetBool("Player in Range", false);
+            EnemyAnimator.SetBool("Target in Range", false);
         }
         else
         {
@@ -64,12 +64,10 @@ public class EnemyBehavior : MonoBehaviour
 
     public void Shoot()
     {
-        EnemyAnimator.SetBool("Player in Range", true);
+        EnemyAnimator.SetBool("Target in Range", true);
         otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
         otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
         Destroy(otherAmmo, 5f);
     }
-
-
 
 }
