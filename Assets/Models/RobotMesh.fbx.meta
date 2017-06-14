@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7c40eb4f2ea79fd4694973a99b9ec8ec
-timeCreated: 1496331769
+guid: 1568fb9ea6c210a4d8ffbda1eb4a65f6
+timeCreated: 1497469501
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -46,22 +46,23 @@ ModelImporter:
     100076: Robodude_r_Leg_Knee2SHJnt
     100078: Robodude_r_Leg_ToeSHJnt
     100080: Robodude_ROOTSHJnt
-    100082: Robodude_Spine_01SHJnt
-    100084: Robodude_Spine_02SHJnt
-    100086: Robodude_Spine_03SHJnt
-    100088: Robodude_Spine_04SHJnt
-    100090: Robodude_Spine_05SHJnt
-    100092: Robodude_Spine_TopSHJnt
-    100094: //RootNode
-    100096: transform55
-    100098: transform56
-    100100: transform57
-    100102: transform58
-    100104: transform59
-    100106: transform60
-    100108: transform61
-    100110: transform62
-    100112: transform63
+    100082: Robodude_SHJntGrp
+    100084: Robodude_Spine_01SHJnt
+    100086: Robodude_Spine_02SHJnt
+    100088: Robodude_Spine_03SHJnt
+    100090: Robodude_Spine_04SHJnt
+    100092: Robodude_Spine_05SHJnt
+    100094: Robodude_Spine_TopSHJnt
+    100096: //RootNode
+    100098: transform55
+    100100: transform56
+    100102: transform57
+    100104: transform58
+    100106: transform59
+    100108: transform60
+    100110: transform61
+    100112: transform62
+    100114: transform63
     400000: joint3
     400002: joint4
     400004: polySurface61
@@ -103,22 +104,23 @@ ModelImporter:
     400076: Robodude_r_Leg_Knee2SHJnt
     400078: Robodude_r_Leg_ToeSHJnt
     400080: Robodude_ROOTSHJnt
-    400082: Robodude_Spine_01SHJnt
-    400084: Robodude_Spine_02SHJnt
-    400086: Robodude_Spine_03SHJnt
-    400088: Robodude_Spine_04SHJnt
-    400090: Robodude_Spine_05SHJnt
-    400092: Robodude_Spine_TopSHJnt
-    400094: //RootNode
-    400096: transform55
-    400098: transform56
-    400100: transform57
-    400102: transform58
-    400104: transform59
-    400106: transform60
-    400108: transform61
-    400110: transform62
-    400112: transform63
+    400082: Robodude_SHJntGrp
+    400084: Robodude_Spine_01SHJnt
+    400086: Robodude_Spine_02SHJnt
+    400088: Robodude_Spine_03SHJnt
+    400090: Robodude_Spine_04SHJnt
+    400092: Robodude_Spine_05SHJnt
+    400094: Robodude_Spine_TopSHJnt
+    400096: //RootNode
+    400098: transform55
+    400100: transform56
+    400102: transform57
+    400104: transform58
+    400106: transform59
+    400108: transform60
+    400110: transform61
+    400112: transform62
+    400114: transform63
     4300000: polySurface66
     4300002: polySurface68
     4300004: polySurface75
@@ -135,7 +137,7 @@ ModelImporter:
     13700010: polySurface77
     13700012: polySurface78
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
