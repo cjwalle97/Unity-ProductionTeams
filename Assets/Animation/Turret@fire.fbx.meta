@@ -38,7 +38,7 @@ ModelImporter:
     4300004: Turretbarrel1
     4300006: Turretbarrel2
     4300008: Turretbarrelhead
-    7400000: Take 001
+    7400000: turret@fire
     9500000: //RootNode
     13700000: Turretbarrel1 1
     13700002: Turretbarrel2
@@ -67,7 +67,63 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: turret@fire
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: polySurface8
+        weight: 1
+      - path: polySurface8/Turretbase
+        weight: 1
+      - path: polySurface8/Turrethead
+        weight: 1
+      - path: Turret_SHJntGrp
+        weight: 1
+      - path: Turret_SHJntGrp/Turret_ROOTSHJnt
+        weight: 1
+      - path: Turret_SHJntGrp/Turret_ROOTSHJnt/Turret_turretbase_01SHJnt
+        weight: 1
+      - path: Turret_SHJntGrp/Turret_ROOTSHJnt/Turret_turretbase_01SHJnt/Turret_turretbase_TopSHJnt
+        weight: 1
+      - path: Turret_SHJntGrp/Turret_ROOTSHJnt/Turret_turretbase_01SHJnt/Turret_turretbase_TopSHJnt/Turret_Turrethead_AuxSHJnt
+        weight: 1
+      - path: Turret_SHJntGrp/Turret_ROOTSHJnt/Turret_turretbase_01SHJnt/Turret_turretbase_TopSHJnt/Turret_Turrethead_AuxSHJnt/Turret_Turretbarrels_AuxSHJnt
+        weight: 1
+      - path: Turretbarrel1
+        weight: 1
+      - path: Turretbarrel1/Turretbarrel1 1
+        weight: 1
+      - path: Turretbarrel1/Turretbarrel2
+        weight: 1
+      - path: Turretbarrel1/Turretbarrelhead
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

@@ -100,7 +100,7 @@ ModelImporter:
     4300008: polySurface77
     4300010: polySurface78
     4300012: polySurface74
-    7400000: fire
+    7400000: robot@fire
     9500000: //RootNode
     13700000: polySurface66
     13700002: polySurface68
@@ -118,7 +118,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: Robodude_SHJntGrp
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -133,7 +133,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: fire
+      name: robot@fire
       takeName: Take 001
       firstFrame: 1
       lastFrame: 15
@@ -271,7 +271,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human: []
@@ -288,7 +288,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 1568fb9ea6c210a4d8ffbda1eb4a65f6,
+    type: 3}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
