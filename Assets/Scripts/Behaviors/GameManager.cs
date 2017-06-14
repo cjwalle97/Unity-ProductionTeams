@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     //AFTER 5 MINUTES NEW ROUND STARTS
     //PAYLOAD SLOWLY RETREATS IF NO PUSHERS ON IT
-    //IF ALL ENEMIES ARE DEAD, ROUND ENDS
+    //IF ALL ENEMIES ARE DEAD, GOTO THE NEXT ROUND
     //AT PAUSE, ITERATE THROUGH EACH ENEMY CAMERA
 
     #region //MEMBER VARIABLES
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public Transform PayloadSpawn;
 
     private float _roundTimer;
-    private List<GameObject> _enemies;
+    private List<GameObject> _enemies;    
     private bool _isPaused;
     private int minuteCounter = 0;
     private int _roundCounter = 1;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private GameObject _buttonpanel;
     private GameObject _gameinfopanel;
 
+    #region //GAMESTATE
     private void PauseGame()
     {
         //player
@@ -55,7 +56,6 @@ public class GameManager : MonoBehaviour
             pusher.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
-
     private void ResumeGame()
     {
         var _player = GameObject.FindGameObjectWithTag("Player");
@@ -80,18 +80,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         _isPaused = false;
     }
-
     //NEEDS WORK
     public void SaveGame()
     {
         //NEEDS WORK
     }
-
     public void QuitGame()
     {
         Debug.Log("Exit Game");
         Application.Quit();
     }
+    #endregion
+    
 
     private bool GameLoop()
     {

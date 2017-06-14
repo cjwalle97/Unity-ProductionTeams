@@ -5,5 +5,6 @@ using UnityEngine;
 
 public class Tower : ScriptableObject, IDamageable
 {
-    public float Health { get; set; }    
+    public float Health { get; set; }
+    public float MaxHealth { get; set; }
 }

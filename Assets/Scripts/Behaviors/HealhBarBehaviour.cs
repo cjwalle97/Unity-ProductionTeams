@@ -13,12 +13,12 @@ public class HealhBarBehaviour : MonoBehaviour
     private GameObject _tower;
     #endregion
 
-    private void UpdatePlayerUI(float health)
+    public void UpdatePlayerUI(float health)
     {
         _playerHealth.value = health;
     }
 
-    private void UpdateTowerUI(float health)
+    public void UpdateTowerUI(float health)
     {
         _towerHealth.value = health;
     }
@@ -30,6 +30,7 @@ public class HealhBarBehaviour : MonoBehaviour
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             _playerHealth = GetComponent<Slider>();
+            _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
             _player.GetComponent<PlayerBehaviour>().onPlayerHealthChange.AddListener(UpdatePlayerUI);
         }
         
@@ -37,6 +38,7 @@ public class HealhBarBehaviour : MonoBehaviour
         {
             _tower = GameObject.FindGameObjectWithTag("Tower");
             _towerHealth = GetComponent<Slider>();
+            _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
             _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
         }
     }
@@ -44,7 +46,14 @@ public class HealhBarBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.tag == "PlayerHealth")
+        {
+            _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
+        }
 
-
+        if (gameObject.tag == "TowerHealth")
+        {
+            _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
+        }
     }
 }
