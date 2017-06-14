@@ -6,23 +6,25 @@ using UnityEngine.Events;
 public class TowerBehaviour : MonoBehaviour {
 
     #region //MEMBER VARIABLES
-    public Tower Tower;
+    public Tower _tower;
+    public float TowerMaxHealth;
     public float TowerHealth;
 
-    [System.Serializable]
+    [System.Serializable, HideInInspector]
     public class OnTowerHealthChange : UnityEvent<float> { };
     public OnTowerHealthChange onTowerHealthChange;
     #endregion
 
     // Use this for initialization
     void Start () {
-
-        Tower.Health = TowerHealth;
-
+        _tower = ScriptableObject.CreateInstance<Tower>();
+        _tower.MaxHealth = TowerMaxHealth;
+        _tower.Health = TowerHealth;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        onTowerHealthChange.Invoke(_tower.Health);
 	}
 }

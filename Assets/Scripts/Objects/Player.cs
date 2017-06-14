@@ -8,6 +8,7 @@ public class Player : ScriptableObject, IDamageable, IDamager
 {
     public string Name;
     public bool Alive;
+    public float MaxHealth { get; set; }
     public float Health { get; set; }
     public float Damage { get; set; }
 
