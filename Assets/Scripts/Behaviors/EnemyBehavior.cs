@@ -45,7 +45,6 @@ public class EnemyBehavior : MonoBehaviour
         if (Agent.remainingDistance > Agent.stoppingDistance)
         {
             EnemyAnimator.SetBool("Player in Range", false);
-
         }
         else
         {

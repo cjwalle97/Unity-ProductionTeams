@@ -31,6 +31,7 @@ public class HealhBarBehaviour : MonoBehaviour
             _player = GameObject.FindGameObjectWithTag("Player");
             _playerHealth = GetComponent<Slider>();
             _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
+            _playerHealth.value = _player.GetComponent<PlayerBehaviour>()._player.Health;
             _player.GetComponent<PlayerBehaviour>().onPlayerHealthChange.AddListener(UpdatePlayerUI);
         }
         
@@ -39,6 +40,7 @@ public class HealhBarBehaviour : MonoBehaviour
             _tower = GameObject.FindGameObjectWithTag("Tower");
             _towerHealth = GetComponent<Slider>();
             _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
+            _towerHealth.value = _tower.GetComponent<TowerBehaviour>()._tower.Health;
             _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
         }
     }
