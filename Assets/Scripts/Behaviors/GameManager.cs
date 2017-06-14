@@ -17,10 +17,16 @@ public class GameManager : MonoBehaviour
     public Transform PayloadSpawn;
 
     private float _roundTimer;
-    private List<GameObject> _enemies;    
+    private List<GameObject> _enemies;
+    
     private bool _isPaused;
     private int minuteCounter = 0;
     private int _roundCounter = 1;
+    public int _enemyLimit;
+    public int _enemySpawnCap;
+    private int _enemiesSpawned;
+    private float randomEnemy;
+    private float randomSpawn;
     #endregion
 
     private GameObject _buttonpanel;
@@ -91,7 +97,15 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
     #endregion
-    
+
+    private void Populate()
+    {
+        if(_enemies.Count < _enemyLimit && _enemiesSpawned != _enemySpawnCap)
+        {
+            //SPAWN MORE ENEMIES
+            
+        }
+    }
 
     private bool GameLoop()
     {
@@ -110,15 +124,14 @@ public class GameManager : MonoBehaviour
             }
 
             //PAUSE THE GAME
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKey("joystick button 7"))
             {
                 PauseGame();
             }
-            
         }
 
         //CHECK IF THE GAME IS PAUSED
-        if (Time.timeScale <= 0.0f && Input.GetKey(KeyCode.E)) //UNPAUSE GAME
+        if (Time.timeScale <= 0.0f && Input.GetKey("joystick button 1")) //UNPAUSE GAME
         {
             Debug.Log("UNPAUSE");
             ResumeGame();
@@ -136,6 +149,11 @@ public class GameManager : MonoBehaviour
             if (_enemies.Contains(attacker) == false)
             {
                 _enemies.Add(attacker);
+            }
+
+            if (attacker == null && _enemies.Contains(attacker))
+            {
+                _enemies.Remove(attacker);
             }
         });
 
@@ -201,7 +219,6 @@ public class GameManager : MonoBehaviour
             {
                 x.text = "Count: " + _enemies.Count;
             }
-            
         });
 
         roundText.GetComponent<Text>().text = _roundCounter.ToString();
@@ -210,8 +227,11 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _enemies = new List<GameObject>();
+        _enemies = new List<GameObject>();    
         _isPaused = false;
+        randomSpawn = UnityEngine.Random.Range(0, 2);
+        randomEnemy = UnityEngine.Random.Range(0, 1);
+        _enemiesSpawned = 0;
         _roundTimer = Time.time;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
         _gameinfopanel = GameObject.FindGameObjectWithTag("GameInfoPanel");
@@ -220,12 +240,14 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        GameLoop();
+    {   
         //UPDATE UI WITH COUNT OF ENEMIES
         //AFTER PUSHER DIES, UI DOSENT UPDATE
+        Populate(); 
         UpdateEnemies();
+        GameLoop();
         UpdateUI();
         //Debug.Log(_roundTimer);
+        //Debug.Log(minuteCounter);
     }
 }

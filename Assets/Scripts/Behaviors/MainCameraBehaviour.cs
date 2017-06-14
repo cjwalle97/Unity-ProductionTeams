@@ -48,7 +48,6 @@ public class MainCameraBehaviour : MonoBehaviour {
 
     }
 
-
     private void FixedUpdate()
     {
         Vector3 offset = _playertransform.position;
