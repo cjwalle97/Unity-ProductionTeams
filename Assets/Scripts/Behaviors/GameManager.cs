@@ -18,18 +18,20 @@ public class GameManager : MonoBehaviour
 
     private float _roundTimer;
     private List<GameObject> _enemies;
-    
+
     private bool _isPaused;
     private int minuteCounter = 0;
     private int _roundCounter = 1;
     private int _enemyLimit;
     private int _enemySpawnCap;
     private int _enemiesSpawned;
-    private float randomEnemy;    
-    #endregion
+    private int _spawnIndex;
 
     private GameObject _buttonpanel;
     private GameObject _gameinfopanel;
+    #endregion
+
+
 
     #region //GAMESTATE
     private void PauseGame()
@@ -98,6 +100,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region //RANDOM NUMBERS
+    public float randomEnemy;
     private float pusherChance = .5f;
     private float playerattackerChance = .5f;
     private float towerattackerChance = .2f;
@@ -105,15 +108,48 @@ public class GameManager : MonoBehaviour
 
     private void Populate()
     {
-        if(_enemies.Count < _enemyLimit && _enemiesSpawned != _enemySpawnCap)
+        randomEnemy = UnityEngine.Random.Range(0, 1);
+
+        if (_enemies.Count < _enemyLimit && _enemiesSpawned != _enemySpawnCap)
         {
             //SPAWN MORE ENEMIES
             //SPAWN 1-4 IN ORDER
-            for(int spawn = 0; spawn < _enemyLimit; spawn++)
+            if (_spawnIndex >= _enemyLimit)
             {
-
+                _spawnIndex = 0;
             }
-            
+
+            if (randomEnemy >= .51f)
+            {
+                var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
+                playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
+                playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
+                _enemiesSpawned += 1;
+                _spawnIndex += 1;
+                Debug.Log("playerattackerspawned");
+            }
+
+            if(randomEnemy >= .5f)
+            {
+                var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
+                payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
+                payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Alive = true;
+                _enemiesSpawned += 1;
+                _spawnIndex += 1;
+                Debug.Log("payloadpusherspawned");
+            }
+
+            if(randomEnemy >= .2f)
+            {
+                //var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Health = 80.0f;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Damage = 8.0f;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Alive = true;
+                //_enemiesSpawned += 1;
+                //_spawnIndex += 1;
+            }
         }
     }
 
@@ -123,12 +159,12 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer += Time.deltaTime;
 
-            if(minuteCounter == 5)
+            if (minuteCounter == 5)
             {
                 Debug.Log("GOTO NEXT ROUND");
             }
 
-            if(_enemies.Count <= 0)
+            if (_enemies.Count <= 0)
             {
                 Debug.Log("GOTO NEXT ROUND");
             }
@@ -173,7 +209,7 @@ public class GameManager : MonoBehaviour
             {
                 _enemies.Add(pusher);
             }
-            if(pusher == null && _enemies.Contains(pusher))
+            if (pusher == null && _enemies.Contains(pusher))
             {
                 _enemies.Remove(pusher);
             }
@@ -195,7 +231,7 @@ public class GameManager : MonoBehaviour
         }
         int calcTime = Int32.Parse(editTime);
         string seconds = "";
-        
+
         if (calcTime / 60 == 1)
         {
             minuteCounter += 1;
@@ -205,7 +241,7 @@ public class GameManager : MonoBehaviour
         var minutes = "0" + minuteCounter;
 
         seconds = calcTime.ToString();
-        if(calcTime <= 9)
+        if (calcTime <= 9)
         {
             seconds = "0" + calcTime;
         }
@@ -222,7 +258,7 @@ public class GameManager : MonoBehaviour
         {
             if (x.tag == "RoundTimer")
             {
-                x.text = "Time: " + _roundTime();                
+                x.text = "Time: " + _roundTime();
             }
 
             if (x.tag == "EnemyCounter")
@@ -237,12 +273,13 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _enemies = new List<GameObject>();    
-        _isPaused = false; 
+        _enemies = new List<GameObject>();
+        _isPaused = false;
         randomEnemy = UnityEngine.Random.Range(0, 1);
         _enemyLimit = 4;
         _enemySpawnCap = 10;
         _enemiesSpawned = 0;
+        _spawnIndex = 0;
         _roundTimer = Time.time;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
         _gameinfopanel = GameObject.FindGameObjectWithTag("GameInfoPanel");
@@ -251,14 +288,15 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         //UPDATE UI WITH COUNT OF ENEMIES
         //AFTER PUSHER DIES, UI DOSENT UPDATE
-        Populate(); 
+        Populate();
         UpdateEnemies();
         GameLoop();
         UpdateUI();
         //Debug.Log(_roundTimer);
         //Debug.Log(minuteCounter);
+        Debug.Log(randomEnemy);
     }
 }
