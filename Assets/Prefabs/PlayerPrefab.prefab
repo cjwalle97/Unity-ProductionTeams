@@ -1855,7 +1855,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462821996061396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -8.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4180516022115080}
@@ -3255,11 +3255,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   PlayerHealth: 100
+  PlayerMaxHealth: 100
   PlayerDamage: 25
   Ammunition: {fileID: 1651444318728354, guid: 3143a047c690ff64b9134458d1e8b618, type: 2}
   MovementSpeed: 20
   LookSpeed: 10
   BulletSpeed: 20
+  onPlayerHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PlayerBehaviour+OnPlayerHealthChange, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   shotCooldown: 1
 --- !u!114 &114467420135520660
 MonoBehaviour:

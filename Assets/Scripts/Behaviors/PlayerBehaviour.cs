@@ -9,6 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
     [HideInInspector]
     public Player _player;
     public float PlayerHealth = 100;
+    public float PlayerMaxHealth = 100;
     public float PlayerDamage = 25;
     public GameObject Ammunition;
     public float MovementSpeed = 20;
@@ -18,22 +19,10 @@ public class PlayerBehaviour : MonoBehaviour
     private Animator _animator;
 
     //SETUP EVENT FOR PLAYER HEALTH CHANGE
-    [System.Serializable]
+    [System.Serializable, HideInInspector]
     public class OnPlayerHealthChange : UnityEvent<float> { }
     public OnPlayerHealthChange onPlayerHealthChange;
     #endregion
-    
-
-    // Use this for initialization
-    void Start()
-    {
-        _animator = GetComponent<Animator>();
-        _player = ScriptableObject.CreateInstance<Player>();
-        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
-        _player.Health = PlayerHealth;
-        _player.Damage = PlayerDamage;
-        _player.Alive = true;
-    }
 
     Vector3 LookAround()
     {
@@ -110,6 +99,18 @@ public class PlayerBehaviour : MonoBehaviour
         shooting = false;
     }
 
+    // Use this for initialization
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _player = ScriptableObject.CreateInstance<Player>();
+        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
+        _player.MaxHealth = PlayerMaxHealth;
+        _player.Health = PlayerHealth;
+        _player.Damage = PlayerDamage;
+        _player.Alive = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -123,7 +124,21 @@ public class PlayerBehaviour : MonoBehaviour
 
         //transform.position += new Vector3(h, 0, v);
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
+
+        if(Input.GetKeyDown(KeyCode.F4))
+        {
+            Debug.Log("PlayerTakeDamage");
+            _player.DoDamage(_player);
+        }
+
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            Debug.Log("PlayerHealthIncrease");
+            _player.Health += 25;
+        }
+
         _animator.SetBool("Alive", CheckIfAlive());
+        onPlayerHealthChange.Invoke(_player.Health);
     }
     bool canshoot, shooting;
 
