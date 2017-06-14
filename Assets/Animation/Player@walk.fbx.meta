@@ -234,6 +234,7 @@ ModelImporter:
     4300040: ProtagGun4FINAL:Scope1
     4300042: ProtagGun4FINAL:RifleBody
     7400000: walk
+    7400002: player@walk
     9500000: //RootNode
     13700000: polySurface190
     13700002: polySurface191
@@ -279,7 +280,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: walk
+      name: player@walk
       takeName: Take 001
       firstFrame: 1
       lastFrame: 29

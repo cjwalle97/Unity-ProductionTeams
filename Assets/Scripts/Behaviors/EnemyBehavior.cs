@@ -19,6 +19,7 @@ public class EnemyBehavior : MonoBehaviour
     public GameObject otherAmmo;
 
     private Transform Target;
+    private float ShotTime;
 
 
     // Use this for initialization
@@ -36,7 +37,7 @@ public class EnemyBehavior : MonoBehaviour
     {
 
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
-        if (Health <= 0)
+        if (EnemyConfig.Health <= 0)
         {
             EnemyConfig.Alive = false;
         }
@@ -44,10 +45,12 @@ public class EnemyBehavior : MonoBehaviour
         Agent.SetDestination(Target.position);
         if (Agent.remainingDistance > Agent.stoppingDistance)
         {
-            EnemyAnimator.SetBool("Player in Range", false);
+            ShotTime = 0f;
+            EnemyAnimator.SetBool("Target in Range", false);
         }
         else
         {
+            ShotTime += 1f;
             Shoot();
         }
 
@@ -61,15 +64,17 @@ public class EnemyBehavior : MonoBehaviour
             Destroy(gameObject, 5f);
         }
     }
-
+    
     public void Shoot()
     {
-        EnemyAnimator.SetBool("Player in Range", true);
-        otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
-        otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
-        Destroy(otherAmmo, 5f);
+        EnemyAnimator.SetBool("Target in Range", true);
+        if (ShotTime % 15 == 0)
+        {
+            otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
+            otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
+            Destroy(otherAmmo, 3f);
+        }
     }
-
 
 
 }

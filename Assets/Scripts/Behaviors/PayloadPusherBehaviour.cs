@@ -40,7 +40,6 @@ public class PayloadPusherBehaviour : MonoBehaviour {
         Pusher.Health = Health;
         Pusher.Damage = PushEffort;
         Pusher.Alive = true;
-        Pusher.Attacker = false;
         _pusher.SetDestination(_target.position);
 	}
 	
