@@ -23,20 +23,23 @@ public class MainCameraBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        _cameras.ForEach(x =>
+        _cameras.ForEach(camera =>
         {
-            if (x != null)
+            if (camera != null)
             {
-                x.enabled = false;
+                camera.enabled = false;
+                camera.GetComponent<AudioListener>().enabled = false;
 
                 if (IsCameraEnabled == false)
                 {
-                    x.enabled = true;
+                    camera.enabled = true;
+                    camera.GetComponent<AudioListener>().enabled = true;
                 }
 
-                if (x.tag == "MainCamera")
+                if (camera.tag == "MainCamera")
                 {
-                    x.enabled = IsCameraEnabled;
+                    camera.enabled = IsCameraEnabled;
+                    camera.GetComponent<AudioListener>().enabled = IsCameraEnabled;
                 }
             }
         });
@@ -44,7 +47,6 @@ public class MainCameraBehaviour : MonoBehaviour {
         //_maincamera.transform.rotation = Quaternion.LookRotation(_playertransform.forward);
 
     }
-
 
     private void FixedUpdate()
     {

@@ -10,7 +10,6 @@ public class PayloadPusherBehaviour : MonoBehaviour {
     public float Health;
     public float PushEffort;
 
-
     private Animator _pusherAni;
     private NavMeshAgent _pusher;
     private bool _pushing;
@@ -62,5 +61,4 @@ public class PayloadPusherBehaviour : MonoBehaviour {
         _pusherAni.SetBool("Alive", Pusher.Alive);
         _pusherAni.SetBool("Pushing", _pushing);
     }
-
 }
