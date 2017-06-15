@@ -337,7 +337,7 @@ public class GameManager : MonoBehaviour
     {
         //UPDATE UI WITH COUNT OF ENEMIES
         //AFTER PUSHER DIES, UI DOSENT UPDATE
-        //Populate();
+        Populate();
         UpdateEnemies();
         GameLoop();
         UpdateUI();
