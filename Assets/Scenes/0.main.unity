@@ -487,6 +487,31 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 574e0fb2812a38044a70a316993cc32e, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1196084934 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4669396741256188, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}
+--- !u!4 &1196084935 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4199252625817792, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}
+--- !u!4 &1196084936 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4444641118512942, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}
+--- !u!4 &1196084937 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4273049141704844, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}
+--- !u!4 &1196084938 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4651160484780220, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}
 --- !u!1001 &1418256559
 Prefab:
   m_ObjectHideFlags: 0
@@ -662,12 +687,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemySpawn:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  PayloadSpawn: {fileID: 0}
+  - {fileID: 1196084934}
+  - {fileID: 1196084935}
+  - {fileID: 1196084936}
+  - {fileID: 1196084937}
+  - {fileID: 1196084938}
+  PayloadSpawn: {fileID: 1196084935}
   randomEnemy: 0
 --- !u!4 &1632400661
 Transform:

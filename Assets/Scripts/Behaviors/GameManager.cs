@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //DOES NOT LIMIT THE SPAWNING OF ENEMIES
-    private bool Populate()
+    private void Populate()
     {
         randomEnemy = Random.Range(0f, 1f);
         _spawnTimer += Time.deltaTime;
@@ -120,22 +120,22 @@ public class GameManager : MonoBehaviour
                 _spawnIndex = 0;
             }
 
-            if (randomEnemy <= .51f && _enemiesSpawned != _enemySpawnCap)
+            if (_enemiesSpawned != _enemySpawnCap)
             {
-                //var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
-                ////playerAttacker.GetComponent<EnemyBehavior>().Ammo.GetComponent<JunkBulletBehaviour>().SetOwner(playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig);
-                ////playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
-                ////playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
-                ////playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
-                //_enemies.Add(playerAttacker);
-                //_enemiesSpawned += 1;
-                //_spawnIndex += 1;
-                //_spawnTimer = 0f;
-                //Debug.Log("playerattackerspawned");
-                return true;
+                var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //playerAttacker.GetComponent<EnemyBehavior>().Ammo.GetComponent<JunkBulletBehaviour>().SetOwner(playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig);
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
+                _enemies.Add(playerAttacker);
+                _enemiesSpawned += 1;
+                _spawnIndex += 1;
+                _spawnTimer = 0f;
+                Debug.Log("playerattackerspawned");
+                //return true;
             }
 
-            if(randomEnemy >= .5f && _enemiesSpawned != _enemySpawnCap)
+            if(_enemiesSpawned != _enemySpawnCap)
             {
                 var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
                 //DO A NULL CHECK HERE
@@ -146,26 +146,26 @@ public class GameManager : MonoBehaviour
                 _enemiesSpawned += 1;
                 _spawnIndex += 1;
                 _spawnTimer = 0f;
-                return true;
+                //return true;
                 Debug.Log("payloadpusherspawned");
             }
 
-            if(randomEnemy <= .60f && _enemiesSpawned != _enemySpawnCap)
+            if(_enemiesSpawned != _enemySpawnCap && _roundCounter > 5)
             {
-                //var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
-                ////towerAttacker.GetComponent<EnemyBehavior>().TowerAttacker.Health = 80.0f;
-                ////towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Damage = 8.0f;
-                ////towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Alive = true;
-                //_enemies.Add(towerAttacker);
-                //_enemiesSpawned += 1;
-                //_spawnIndex += 1;
-                //_spawnTimer = 0f;
-                return true;
+                var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //towerAttacker.GetComponent<EnemyBehavior>().TowerAttacker.Health = 80.0f;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Damage = 8.0f;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Alive = true;
+                _enemies.Add(towerAttacker);
+                _enemiesSpawned += 1;
+                _spawnIndex += 1;
+                _spawnTimer = 0f;
+                //return true;
             }
-            return false;
+            //return false;
         }
 
-        return false;
+        //return false;
     }
 
     private bool GameLoop()
