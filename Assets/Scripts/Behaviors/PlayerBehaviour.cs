@@ -82,6 +82,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //RESEARCH THIS
+    bool canshoot, shooting;
     IEnumerator ShotCooldown(float timer)
     {
         if (shooting)
@@ -140,7 +141,7 @@ public class PlayerBehaviour : MonoBehaviour
         _animator.SetBool("Alive", CheckIfAlive());
         onPlayerHealthChange.Invoke(_player.Health);
     }
-    bool canshoot, shooting;
+    
 
     void FixedUpdate()
     {

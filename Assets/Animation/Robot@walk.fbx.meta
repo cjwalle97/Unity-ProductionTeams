@@ -128,6 +128,7 @@ ModelImporter:
     4300008: R_arm
     4300010: R_Shoulder
     4300012: Torso
+    7400000: Take 001
     9500000: //RootNode
     13700000: L_arm 1
     13700002: L_Leg
@@ -158,6 +159,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
