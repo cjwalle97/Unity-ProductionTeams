@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,26 +13,26 @@ public class GameManager : MonoBehaviour
     //AT PAUSE, ITERATE THROUGH EACH ENEMY CAMERA
 
     #region //MEMBER VARIABLES
+    private GameObject _buttonpanel;
+    private GameObject _gameinfopanel;
+
     public List<Transform> EnemySpawn;
     public Transform PayloadSpawn;
 
     private float _roundTimer;
-    private List<GameObject> _enemies;
-    
-    private bool _isPaused;
-    private int minuteCounter = 0;
+    private float _spawnTimer;
     private int _roundCounter = 1;
-    public int _enemyLimit;
-    public int _enemySpawnCap;
+    private int minuteCounter = 0;
+
+    private List<GameObject> _enemies;
+    private int _enemyLimit;
+    private int _enemySpawnCap;
     private int _enemiesSpawned;
-    private float randomEnemy;
-    private float randomSpawn;
+    private int _spawnIndex;
     #endregion
 
-    private GameObject _buttonpanel;
-    private GameObject _gameinfopanel;
-
     #region //GAMESTATE
+    private bool _isPaused;
     private void PauseGame()
     {
         //player
@@ -98,13 +98,74 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void Populate()
+    #region //RANDOM NUMBERS
+    public float randomEnemy;
+    private float pusherChance = .5f;
+    private float playerattackerChance = .5f;
+    private float towerattackerChance = .2f;
+    #endregion
+
+    //DOES NOT LIMIT THE SPAWNING OF ENEMIES
+    private bool Populate()
     {
-        if(_enemies.Count < _enemyLimit && _enemiesSpawned != _enemySpawnCap)
+        randomEnemy = Random.Range(0f, 1f);
+        _spawnTimer += Time.deltaTime;
+
+        if (_spawnTimer >= 12.0f && _enemiesSpawned != _enemySpawnCap)
         {
             //SPAWN MORE ENEMIES
-            
+            //SPAWN 1-4 IN ORDER
+            if (_spawnIndex >= _enemyLimit)
+            {
+                _spawnIndex = 0;
+            }
+
+            if (randomEnemy <= .51f && _enemiesSpawned != _enemySpawnCap)
+            {
+                //var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
+                //_enemies.Add(playerAttacker);
+                //_enemiesSpawned += 1;
+                //_spawnIndex += 1;
+                //_spawnTimer = 0f;
+                //Debug.Log("playerattackerspawned");
+                //return true;
+            }
+
+            if(randomEnemy <= .5f && _enemiesSpawned != _enemySpawnCap)
+            {
+                var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //DO A NULL CHECK HERE
+                //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
+                //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
+                //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Alive = true;
+                _enemies.Add(payloadPusher);
+                _enemiesSpawned += 1;
+                _spawnIndex += 1;
+                _spawnTimer = 0f;
+                return true;
+                Debug.Log("payloadpusherspawned");
+            }
+
+            if(randomEnemy <= .2f && _enemiesSpawned != _enemySpawnCap)
+            {
+                //var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Health = 80.0f;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Damage = 8.0f;
+                //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Alive = true;
+                //_enemies.Add(towerAttacker);
+                //_enemiesSpawned += 1;
+                //_spawnIndex += 1;
+                //_spawnTimer = 0f;
+                //return true;
+            }
+
+            return false;
         }
+
+        return false;
     }
 
     private bool GameLoop()
@@ -113,12 +174,21 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer += Time.deltaTime;
 
-            if(minuteCounter == 5)
+            if (minuteCounter == 5)
             {
                 Debug.Log("GOTO NEXT ROUND");
             }
 
-            if(_enemies.Count <= 0)
+            if(_enemies.Count > _enemyLimit)
+            {
+                var difference = _enemies.Count - _enemyLimit;
+                for(int i = difference; i >= 0; i--)
+                {
+                    _enemies.Remove(_enemies[i]);
+                }
+            }
+
+            if (_enemies.Count <= 0)
             {
                 Debug.Log("GOTO NEXT ROUND");
             }
@@ -138,34 +208,13 @@ public class GameManager : MonoBehaviour
         }
         return false;
     }
-
+   
     private void UpdateEnemies()
     {
-        var _attackers = GameObject.FindGameObjectsWithTag("Enemy").ToList<GameObject>();
-        var _pushers = GameObject.FindGameObjectsWithTag("PayloadPusher").ToList<GameObject>(); ;
-
-        _attackers.ForEach(attacker =>
-        {
-            if (_enemies.Contains(attacker) == false)
+        _enemies.ForEach(enemy => {
+           if(enemy == null && _enemies.Contains(enemy))
             {
-                _enemies.Add(attacker);
-            }
-
-            if (attacker == null && _enemies.Contains(attacker))
-            {
-                _enemies.Remove(attacker);
-            }
-        });
-
-        _pushers.ForEach(pusher =>
-        {
-            if (_enemies.Contains(pusher) == false)
-            {
-                _enemies.Add(pusher);
-            }
-            if(pusher == null && _enemies.Contains(pusher))
-            {
-                _enemies.Remove(pusher);
+                _enemies.Remove(enemy);
             }
         });
     }
@@ -183,9 +232,9 @@ public class GameManager : MonoBehaviour
             }
             editTime += rawTime[i];
         }
-        int calcTime = Int32.Parse(editTime);
+        int calcTime = System.Int32.Parse(editTime);
         string seconds = "";
-        
+
         if (calcTime / 60 == 1)
         {
             minuteCounter += 1;
@@ -195,7 +244,7 @@ public class GameManager : MonoBehaviour
         var minutes = "0" + minuteCounter;
 
         seconds = calcTime.ToString();
-        if(calcTime <= 9)
+        if (calcTime <= 9)
         {
             seconds = "0" + calcTime;
         }
@@ -208,31 +257,31 @@ public class GameManager : MonoBehaviour
     {
         var _infopanel = _gameinfopanel.GetComponentsInChildren<Text>().ToList<Text>();
         var roundText = GameObject.FindGameObjectWithTag("RoundCounter");
+        var timerText = GameObject.FindGameObjectWithTag("RoundTimer");
         _infopanel.ForEach(x =>
         {
-            if (x.tag == "RoundTimer")
-            {
-                x.text = "Time: " + _roundTime();                
-            }
-
             if (x.tag == "EnemyCounter")
             {
                 x.text = "Count: " + _enemies.Count;
             }
         });
 
+        timerText.GetComponent<Text>().text = _roundTime();
         roundText.GetComponent<Text>().text = _roundCounter.ToString();
     }
 
     // Use this for initialization
     void Start()
     {
-        _enemies = new List<GameObject>();    
+        _enemies = new List<GameObject>();
         _isPaused = false;
-        randomSpawn = UnityEngine.Random.Range(0, 2);
-        randomEnemy = UnityEngine.Random.Range(0, 1);
+        randomEnemy = Random.Range(0f, 1f);
+        _enemyLimit = 2;
+        _enemySpawnCap = 10;
         _enemiesSpawned = 0;
+        _spawnIndex = 0;
         _roundTimer = Time.time;
+        _spawnTimer = Time.time;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
         _gameinfopanel = GameObject.FindGameObjectWithTag("GameInfoPanel");
         _buttonpanel.SetActive(false);
@@ -240,10 +289,10 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         //UPDATE UI WITH COUNT OF ENEMIES
         //AFTER PUSHER DIES, UI DOSENT UPDATE
-        Populate(); 
+        Populate();
         UpdateEnemies();
         GameLoop();
         UpdateUI();

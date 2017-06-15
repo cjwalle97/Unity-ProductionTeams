@@ -17,7 +17,7 @@ public class PayloadPusherBehaviour : MonoBehaviour {
 
     bool Push()
     {
-        if(_pusher.remainingDistance <= _pusher.stoppingDistance)
+        if(_pusher.remainingDistance < _pusher.stoppingDistance)
         {
             return true;
         }
@@ -40,23 +40,31 @@ public class PayloadPusherBehaviour : MonoBehaviour {
         Pusher.Health = Health;
         Pusher.Damage = PushEffort;
         Pusher.Alive = true;
-        Pusher.Attacker = false;
+        _pusher.acceleration = 1.0f;
+        _pusher.speed = 2.0f;
         _pusher.SetDestination(_target.position);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        //_target = GameObject.FindGameObjectWithTag("Payload").GetComponent<PayloadBehaviour>().PusherTarget;
         _pushing = Push();
         if(Pusher.Health <= 0.0f)
         {
             Dead();
         }
+        
 	}
 
     private void FixedUpdate()
     {
-        _pusher.SetDestination(_target.position);
+        _target = GameObject.FindGameObjectWithTag("Payload").GetComponent<PayloadBehaviour>().PusherTarget;
+        _pusher.destination = _target.position;
+        //if (_pusher.remainingDistance > 50)
+        //{
+        //    _pusher.SetDestination(_target.position);
+        //}
 
         _pusherAni.SetBool("Alive", Pusher.Alive);
         _pusherAni.SetBool("Pushing", _pushing);
