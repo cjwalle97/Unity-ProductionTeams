@@ -692,12 +692,13 @@ GameObject:
   - component: {fileID: 4141625579671262}
   - component: {fileID: 114283060678998300}
   - component: {fileID: 195006548446454278}
+  - component: {fileID: 65084589869134722}
   m_Layer: 0
   m_Name: '[tower]'
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1827443919688698
 GameObject:
@@ -949,13 +950,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1808630703752326}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 6.5, y: -13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4297451613718994}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4147956614054858
 Transform:
   m_ObjectHideFlags: 1
@@ -3216,6 +3217,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1303582478026242}
   m_Mesh: {fileID: 4300046, guid: ea036485c016e6446aeb52748227be22, type: 3}
+--- !u!65 &65084589869134722
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1808630703752326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.6, y: 6.62, z: 6.1}
+  m_Center: {x: 0, y: 2.93, z: -1.37}
 --- !u!95 &95691931911722414
 Animator:
   serializedVersion: 3

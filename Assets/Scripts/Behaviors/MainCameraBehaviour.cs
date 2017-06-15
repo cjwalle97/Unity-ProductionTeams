@@ -56,6 +56,11 @@ public class MainCameraBehaviour : MonoBehaviour {
         offset += calc_offset;
         _maincamera.transform.position = offset;
         _maincamera.transform.rotation = Quaternion.AngleAxis(ang, Vector3.right);
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            _maincamera.transform.rotation = Quaternion.LookRotation(_playertransform.forward);
+        }
         //_maincamera.transform.rotation = _playertransform.localRotation;
         //_maincamera.transform.rotation = Quaternion.LookRotation(_playertransform.forward);
     }
