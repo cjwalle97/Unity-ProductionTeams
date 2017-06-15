@@ -24,7 +24,6 @@ public class TowerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         onTowerHealthChange.Invoke(_tower.Health);
 	}
 }
