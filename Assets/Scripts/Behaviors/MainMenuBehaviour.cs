@@ -9,7 +9,7 @@ public class MainMenuBehaviour : MonoBehaviour
     public Text ControlsText;
     public Text ArtistsText;
     public Text ProgrammersText;
-    
+
     void Start()
     {
         ControlsText.text = "";
@@ -20,11 +20,17 @@ public class MainMenuBehaviour : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("0.main", LoadSceneMode.Additive);
+        DestroyImmediate(gameObject);
     }
 
     public void DisplayControls()
     {
-        ControlsText.text = "@Trent add the controlls bruhhhh!!!!";
+        ControlsText.text = "Designed for use with an Xbox One Controller \n"
+            + "Left Analog Stick = Movement \n"
+            + "Right Analog Stick = Aim \n"
+            + "Right Trigger = Shoot"
+            + "A = Select (In Menus) \n"
+            + "B = Back (In Menus)";
     }
 
     public void DisplayCredits()
