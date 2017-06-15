@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
     private GameObject _buttonpanel;
     private GameObject _gameinfopanel;
     #endregion
-
-
 
     #region //GAMESTATE
     private void PauseGame()
@@ -106,11 +104,12 @@ public class GameManager : MonoBehaviour
     private float towerattackerChance = .2f;
     #endregion
 
+    //DOES NOT LIMIT THE SPAWNING OF ENEMIES
     private void Populate()
     {
-        randomEnemy = UnityEngine.Random.Range(0, 1);
+        randomEnemy = Random.Range(0f, 1f);
 
-        if (_enemies.Count < _enemyLimit && _enemiesSpawned != _enemySpawnCap)
+        if (_enemies.Count <= _enemyLimit && _enemiesSpawned != _enemySpawnCap)
         {
             //SPAWN MORE ENEMIES
             //SPAWN 1-4 IN ORDER
@@ -119,34 +118,38 @@ public class GameManager : MonoBehaviour
                 _spawnIndex = 0;
             }
 
-            if (randomEnemy >= .51f)
+            if (randomEnemy <= .51f && _enemiesSpawned != _enemySpawnCap)
             {
-                var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
-                playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
-                playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
-                playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
-                _enemiesSpawned += 1;
-                _spawnIndex += 1;
-                Debug.Log("playerattackerspawned");
+                //var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
+                //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
+                //_enemies.Add(playerAttacker);
+                //_enemiesSpawned += 1;
+                //_spawnIndex += 1;
+                //Debug.Log("playerattackerspawned");
             }
 
-            if(randomEnemy >= .5f)
+            if(randomEnemy <= .5f && _enemiesSpawned != _enemySpawnCap)
             {
                 var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //DO A NULL CHECK HERE
                 payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
                 payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
                 payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Alive = true;
+                _enemies.Add(payloadPusher);
                 _enemiesSpawned += 1;
                 _spawnIndex += 1;
                 Debug.Log("payloadpusherspawned");
             }
 
-            if(randomEnemy >= .2f)
+            if(randomEnemy <= .2f && _enemiesSpawned != _enemySpawnCap)
             {
                 //var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
                 //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Health = 80.0f;
                 //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Damage = 8.0f;
                 //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Alive = true;
+                //_enemies.Add(towerAttacker);
                 //_enemiesSpawned += 1;
                 //_spawnIndex += 1;
             }
@@ -162,6 +165,15 @@ public class GameManager : MonoBehaviour
             if (minuteCounter == 5)
             {
                 Debug.Log("GOTO NEXT ROUND");
+            }
+
+            if(_enemies.Count > _enemyLimit)
+            {
+                var difference = _enemies.Count - _enemyLimit;
+                for(int i = difference; i >= 0; i--)
+                {
+                    _enemies.Remove(_enemies[i]);
+                }
             }
 
             if (_enemies.Count <= 0)
@@ -184,34 +196,13 @@ public class GameManager : MonoBehaviour
         }
         return false;
     }
-
+   
     private void UpdateEnemies()
     {
-        var _attackers = GameObject.FindGameObjectsWithTag("Enemy").ToList<GameObject>();
-        var _pushers = GameObject.FindGameObjectsWithTag("PayloadPusher").ToList<GameObject>(); ;
-
-        _attackers.ForEach(attacker =>
-        {
-            if (_enemies.Contains(attacker) == false)
+        _enemies.ForEach(enemy => {
+           if(enemy == null && _enemies.Contains(enemy))
             {
-                _enemies.Add(attacker);
-            }
-
-            if (attacker == null && _enemies.Contains(attacker))
-            {
-                _enemies.Remove(attacker);
-            }
-        });
-
-        _pushers.ForEach(pusher =>
-        {
-            if (_enemies.Contains(pusher) == false)
-            {
-                _enemies.Add(pusher);
-            }
-            if (pusher == null && _enemies.Contains(pusher))
-            {
-                _enemies.Remove(pusher);
+                _enemies.Remove(enemy);
             }
         });
     }
@@ -229,7 +220,7 @@ public class GameManager : MonoBehaviour
             }
             editTime += rawTime[i];
         }
-        int calcTime = Int32.Parse(editTime);
+        int calcTime = System.Int32.Parse(editTime);
         string seconds = "";
 
         if (calcTime / 60 == 1)
@@ -254,19 +245,16 @@ public class GameManager : MonoBehaviour
     {
         var _infopanel = _gameinfopanel.GetComponentsInChildren<Text>().ToList<Text>();
         var roundText = GameObject.FindGameObjectWithTag("RoundCounter");
+        var timerText = GameObject.FindGameObjectWithTag("RoundTimer");
         _infopanel.ForEach(x =>
         {
-            if (x.tag == "RoundTimer")
-            {
-                x.text = "Time: " + _roundTime();
-            }
-
             if (x.tag == "EnemyCounter")
             {
                 x.text = "Count: " + _enemies.Count;
             }
         });
 
+        timerText.GetComponent<Text>().text = _roundTime();
         roundText.GetComponent<Text>().text = _roundCounter.ToString();
     }
 
@@ -275,8 +263,8 @@ public class GameManager : MonoBehaviour
     {
         _enemies = new List<GameObject>();
         _isPaused = false;
-        randomEnemy = UnityEngine.Random.Range(0, 1);
-        _enemyLimit = 4;
+        randomEnemy = Random.Range(0f, 1f);
+        _enemyLimit = 2;
         _enemySpawnCap = 10;
         _enemiesSpawned = 0;
         _spawnIndex = 0;
@@ -297,6 +285,5 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         //Debug.Log(_roundTimer);
         //Debug.Log(minuteCounter);
-        Debug.Log(randomEnemy);
     }
 }

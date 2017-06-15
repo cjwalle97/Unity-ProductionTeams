@@ -23,6 +23,7 @@ public class MainCameraBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        _cameras = GameObject.FindObjectsOfType<Camera>().ToList<Camera>();
         _cameras.ForEach(camera =>
         {
             if (camera != null)
