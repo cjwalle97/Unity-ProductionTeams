@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
             if (randomEnemy <= .51f && _enemiesSpawned != _enemySpawnCap)
             {
-                //var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttackerPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
@@ -254,17 +254,12 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        var _infopanel = _gameinfopanel.GetComponentsInChildren<Text>().ToList<Text>();
+        var enemyCountText = _gameinfopanel.GetComponentInChildren<Text>();
         var roundText = GameObject.FindGameObjectWithTag("RoundCounter");
         var timerText = GameObject.FindGameObjectWithTag("RoundTimer");
-        _infopanel.ForEach(x =>
-        {
-            if (x.tag == "EnemyCounter")
-            {
-                x.text = "Count: " + _enemies.Count;
-            }
-        });
 
+
+        enemyCountText.text = "Count: " + _enemies.Count().ToString();
         timerText.GetComponent<Text>().text = _roundTime();
         roundText.GetComponent<Text>().text = _roundCounter.ToString();
     }
@@ -297,6 +292,6 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         //Debug.Log(_roundTimer);
         //Debug.Log(minuteCounter);
-        Debug.Log("Spawned: :" + _enemiesSpawned);
+        //Debug.Log("Spawned: :" + _enemiesSpawned);
     }
 }
