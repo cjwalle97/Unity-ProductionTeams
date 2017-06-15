@@ -78,7 +78,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
-        //SceneManager.LoadScene("4.gameover");
+        SceneManager.LoadScene("4.gameover");
         //this.enabled = false;
     }
 
