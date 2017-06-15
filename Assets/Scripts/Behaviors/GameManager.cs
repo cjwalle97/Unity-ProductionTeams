@@ -13,25 +13,26 @@ public class GameManager : MonoBehaviour
     //AT PAUSE, ITERATE THROUGH EACH ENEMY CAMERA
 
     #region //MEMBER VARIABLES
+    private GameObject _buttonpanel;
+    private GameObject _gameinfopanel;
+
     public List<Transform> EnemySpawn;
     public Transform PayloadSpawn;
 
     private float _roundTimer;
-    private List<GameObject> _enemies;
-
-    private bool _isPaused;
-    private int minuteCounter = 0;
+    private float _spawnTimer;
     private int _roundCounter = 1;
+    private int minuteCounter = 0;
+
+    private List<GameObject> _enemies;
     private int _enemyLimit;
     private int _enemySpawnCap;
     private int _enemiesSpawned;
     private int _spawnIndex;
-
-    private GameObject _buttonpanel;
-    private GameObject _gameinfopanel;
     #endregion
 
     #region //GAMESTATE
+    private bool _isPaused;
     private void PauseGame()
     {
         //player
@@ -105,11 +106,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //DOES NOT LIMIT THE SPAWNING OF ENEMIES
-    private void Populate()
+    private bool Populate()
     {
         randomEnemy = Random.Range(0f, 1f);
+        _spawnTimer += Time.deltaTime;
 
-        if (_enemies.Count <= _enemyLimit && _enemiesSpawned != _enemySpawnCap)
+        if (_spawnTimer >= 12.0f && _enemiesSpawned != _enemySpawnCap)
         {
             //SPAWN MORE ENEMIES
             //SPAWN 1-4 IN ORDER
@@ -127,19 +129,23 @@ public class GameManager : MonoBehaviour
                 //_enemies.Add(playerAttacker);
                 //_enemiesSpawned += 1;
                 //_spawnIndex += 1;
+                //_spawnTimer = 0f;
                 //Debug.Log("playerattackerspawned");
+                //return true;
             }
 
             if(randomEnemy <= .5f && _enemiesSpawned != _enemySpawnCap)
             {
                 var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
                 //DO A NULL CHECK HERE
-                payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
-                payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
-                payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Alive = true;
+                //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
+                //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
+                //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Alive = true;
                 _enemies.Add(payloadPusher);
                 _enemiesSpawned += 1;
                 _spawnIndex += 1;
+                _spawnTimer = 0f;
+                return true;
                 Debug.Log("payloadpusherspawned");
             }
 
@@ -152,8 +158,14 @@ public class GameManager : MonoBehaviour
                 //_enemies.Add(towerAttacker);
                 //_enemiesSpawned += 1;
                 //_spawnIndex += 1;
+                //_spawnTimer = 0f;
+                //return true;
             }
+
+            return false;
         }
+
+        return false;
     }
 
     private bool GameLoop()
@@ -269,6 +281,7 @@ public class GameManager : MonoBehaviour
         _enemiesSpawned = 0;
         _spawnIndex = 0;
         _roundTimer = Time.time;
+        _spawnTimer = Time.time;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
         _gameinfopanel = GameObject.FindGameObjectWithTag("GameInfoPanel");
         _buttonpanel.SetActive(false);
