@@ -9,12 +9,11 @@ public class PlayerBulletSpawnBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        Spawn = GetComponent<Transform>();		
+        Spawn = transform;		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-        Spawn = GetComponent<Transform>();
+	void FixedUpdate () {
+        Spawn = transform;
     }
 }
