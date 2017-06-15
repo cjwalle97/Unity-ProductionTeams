@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 
             if (_enemiesSpawned != _enemySpawnCap)
             {
-                var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusher"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
                 //DO A NULL CHECK HERE
                 //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
                 //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
@@ -337,7 +337,7 @@ public class GameManager : MonoBehaviour
     {
         //UPDATE UI WITH COUNT OF ENEMIES
         //AFTER PUSHER DIES, UI DOSENT UPDATE
-        Populate();
+        //Populate();
         UpdateEnemies();
         GameLoop();
         UpdateUI();

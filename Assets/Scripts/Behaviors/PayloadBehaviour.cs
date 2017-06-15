@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PayloadBehaviour : MonoBehaviour {
 
@@ -49,10 +50,16 @@ public class PayloadBehaviour : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "PayloadPusher")
+        if (other.tag == "PayloadPusher")
         {
             PusherEffort += other.GetComponent<PayloadPusherBehaviour>().Pusher.Damage;
         }
+
+        if (other.tag == "Tower")
+        {
+            SceneManager.LoadScene("4.gameover");
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
