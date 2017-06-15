@@ -9,7 +9,6 @@ public class Enemy : ScriptableObject, IDamageable, IDamager {
     public float Health { get; set; }
     public float Damage { get; set; }
     public bool Alive;
-    public bool Attacker;
 
     public void DoDamage(IDamageable damageable)
     {

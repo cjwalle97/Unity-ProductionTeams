@@ -1,51 +1,51 @@
 fileFormatVersion: 2
-guid: 7c40eb4f2ea79fd4694973a99b9ec8ec
-timeCreated: 1496331769
+guid: c3d17c9ecb2480a4c9072ad07a864da6
+timeCreated: 1497480225
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: joint3
     100002: joint4
-    100004: polySurface61
-    100006: polySurface63
-    100008: polySurface65
-    100010: polySurface66
-    100012: polySurface67
-    100014: polySurface68
+    100004: L_arm
+    100006: L_arm 1
+    100008: L_Leg
+    100010: L_Shoulder
+    100012: Legs
+    100014: polySurface61
     100016: polySurface69
     100018: polySurface70
     100020: polySurface71
     100022: polySurface72
     100024: polySurface73
     100026: polySurface74
-    100028: polySurface74 1
-    100030: polySurface75
-    100032: polySurface76
-    100034: polySurface77
-    100036: polySurface78
-    100038: Robodude_Head_TopSHJnt
-    100040: Robodude_l_Arm_ClavicleSHJnt
-    100042: Robodude_l_Arm_ElbowSHJnt
-    100044: Robodude_l_Arm_ShoulderSHJnt
-    100046: Robodude_l_Arm_WristSHJnt
-    100048: Robodude_l_Leg_AnkleSHJnt
-    100050: Robodude_l_Leg_BallSHJnt
-    100052: Robodude_l_Leg_HipSHJnt
-    100054: Robodude_l_Leg_Knee1SHJnt
-    100056: Robodude_l_Leg_Knee2SHJnt
-    100058: Robodude_l_Leg_ToeSHJnt
-    100060: Robodude_r_Arm_ClavicleSHJnt
-    100062: Robodude_r_Arm_ElbowSHJnt
-    100064: Robodude_r_Arm_ShoulderSHJnt
-    100066: Robodude_r_Arm_WristSHJnt
-    100068: Robodude_r_Leg_AnkleSHJnt
-    100070: Robodude_r_Leg_BallSHJnt
-    100072: Robodude_r_Leg_HipSHJnt
-    100074: Robodude_r_Leg_Knee1SHJnt
-    100076: Robodude_r_Leg_Knee2SHJnt
-    100078: Robodude_r_Leg_ToeSHJnt
-    100080: Robodude_ROOTSHJnt
+    100028: R_arm
+    100030: R_arm 1
+    100032: R_Leg
+    100034: R_Shoulder
+    100036: Robodude_Head_TopSHJnt
+    100038: Robodude_l_Arm_ClavicleSHJnt
+    100040: Robodude_l_Arm_ElbowSHJnt
+    100042: Robodude_l_Arm_ShoulderSHJnt
+    100044: Robodude_l_Arm_WristSHJnt
+    100046: Robodude_l_Leg_AnkleSHJnt
+    100048: Robodude_l_Leg_BallSHJnt
+    100050: Robodude_l_Leg_HipSHJnt
+    100052: Robodude_l_Leg_Knee1SHJnt
+    100054: Robodude_l_Leg_Knee2SHJnt
+    100056: Robodude_l_Leg_ToeSHJnt
+    100058: Robodude_r_Arm_ClavicleSHJnt
+    100060: Robodude_r_Arm_ElbowSHJnt
+    100062: Robodude_r_Arm_ShoulderSHJnt
+    100064: Robodude_r_Arm_WristSHJnt
+    100066: Robodude_r_Leg_AnkleSHJnt
+    100068: Robodude_r_Leg_BallSHJnt
+    100070: Robodude_r_Leg_HipSHJnt
+    100072: Robodude_r_Leg_Knee1SHJnt
+    100074: Robodude_r_Leg_Knee2SHJnt
+    100076: Robodude_r_Leg_ToeSHJnt
+    100078: Robodude_ROOTSHJnt
+    100080: Robodude_SHJntGrp
     100082: Robodude_Spine_01SHJnt
     100084: Robodude_Spine_02SHJnt
     100086: Robodude_Spine_03SHJnt
@@ -53,56 +53,57 @@ ModelImporter:
     100090: Robodude_Spine_05SHJnt
     100092: Robodude_Spine_TopSHJnt
     100094: //RootNode
-    100096: transform55
-    100098: transform56
-    100100: transform57
-    100102: transform58
-    100104: transform59
-    100106: transform60
-    100108: transform61
-    100110: transform62
-    100112: transform63
+    100096: Torso
+    100098: transform55
+    100100: transform56
+    100102: transform57
+    100104: transform58
+    100106: transform59
+    100108: transform60
+    100110: transform61
+    100112: transform62
+    100114: transform63
     400000: joint3
     400002: joint4
-    400004: polySurface61
-    400006: polySurface63
-    400008: polySurface65
-    400010: polySurface66
-    400012: polySurface67
-    400014: polySurface68
+    400004: L_arm
+    400006: L_arm 1
+    400008: L_Leg
+    400010: L_Shoulder
+    400012: Legs
+    400014: polySurface61
     400016: polySurface69
     400018: polySurface70
     400020: polySurface71
     400022: polySurface72
     400024: polySurface73
     400026: polySurface74
-    400028: polySurface74 1
-    400030: polySurface75
-    400032: polySurface76
-    400034: polySurface77
-    400036: polySurface78
-    400038: Robodude_Head_TopSHJnt
-    400040: Robodude_l_Arm_ClavicleSHJnt
-    400042: Robodude_l_Arm_ElbowSHJnt
-    400044: Robodude_l_Arm_ShoulderSHJnt
-    400046: Robodude_l_Arm_WristSHJnt
-    400048: Robodude_l_Leg_AnkleSHJnt
-    400050: Robodude_l_Leg_BallSHJnt
-    400052: Robodude_l_Leg_HipSHJnt
-    400054: Robodude_l_Leg_Knee1SHJnt
-    400056: Robodude_l_Leg_Knee2SHJnt
-    400058: Robodude_l_Leg_ToeSHJnt
-    400060: Robodude_r_Arm_ClavicleSHJnt
-    400062: Robodude_r_Arm_ElbowSHJnt
-    400064: Robodude_r_Arm_ShoulderSHJnt
-    400066: Robodude_r_Arm_WristSHJnt
-    400068: Robodude_r_Leg_AnkleSHJnt
-    400070: Robodude_r_Leg_BallSHJnt
-    400072: Robodude_r_Leg_HipSHJnt
-    400074: Robodude_r_Leg_Knee1SHJnt
-    400076: Robodude_r_Leg_Knee2SHJnt
-    400078: Robodude_r_Leg_ToeSHJnt
-    400080: Robodude_ROOTSHJnt
+    400028: R_arm
+    400030: R_arm 1
+    400032: R_Leg
+    400034: R_Shoulder
+    400036: Robodude_Head_TopSHJnt
+    400038: Robodude_l_Arm_ClavicleSHJnt
+    400040: Robodude_l_Arm_ElbowSHJnt
+    400042: Robodude_l_Arm_ShoulderSHJnt
+    400044: Robodude_l_Arm_WristSHJnt
+    400046: Robodude_l_Leg_AnkleSHJnt
+    400048: Robodude_l_Leg_BallSHJnt
+    400050: Robodude_l_Leg_HipSHJnt
+    400052: Robodude_l_Leg_Knee1SHJnt
+    400054: Robodude_l_Leg_Knee2SHJnt
+    400056: Robodude_l_Leg_ToeSHJnt
+    400058: Robodude_r_Arm_ClavicleSHJnt
+    400060: Robodude_r_Arm_ElbowSHJnt
+    400062: Robodude_r_Arm_ShoulderSHJnt
+    400064: Robodude_r_Arm_WristSHJnt
+    400066: Robodude_r_Leg_AnkleSHJnt
+    400068: Robodude_r_Leg_BallSHJnt
+    400070: Robodude_r_Leg_HipSHJnt
+    400072: Robodude_r_Leg_Knee1SHJnt
+    400074: Robodude_r_Leg_Knee2SHJnt
+    400076: Robodude_r_Leg_ToeSHJnt
+    400078: Robodude_ROOTSHJnt
+    400080: Robodude_SHJntGrp
     400082: Robodude_Spine_01SHJnt
     400084: Robodude_Spine_02SHJnt
     400086: Robodude_Spine_03SHJnt
@@ -110,30 +111,31 @@ ModelImporter:
     400090: Robodude_Spine_05SHJnt
     400092: Robodude_Spine_TopSHJnt
     400094: //RootNode
-    400096: transform55
-    400098: transform56
-    400100: transform57
-    400102: transform58
-    400104: transform59
-    400106: transform60
-    400108: transform61
-    400110: transform62
-    400112: transform63
-    4300000: polySurface66
-    4300002: polySurface68
-    4300004: polySurface75
-    4300006: polySurface76
-    4300008: polySurface77
-    4300010: polySurface78
-    4300012: polySurface74
+    400096: Torso
+    400098: transform55
+    400100: transform56
+    400102: transform57
+    400104: transform58
+    400106: transform59
+    400108: transform60
+    400110: transform61
+    400112: transform62
+    400114: transform63
+    4300000: L_Leg
+    4300002: R_Leg
+    4300004: L_arm
+    4300006: L_Shoulder
+    4300008: R_arm
+    4300010: R_Shoulder
+    4300012: Torso
     9500000: //RootNode
-    13700000: polySurface66
-    13700002: polySurface68
-    13700004: polySurface74
-    13700006: polySurface75
-    13700008: polySurface76
-    13700010: polySurface77
-    13700012: polySurface78
+    13700000: L_arm 1
+    13700002: L_Leg
+    13700004: L_Shoulder
+    13700006: R_arm 1
+    13700008: R_Leg
+    13700010: R_Shoulder
+    13700012: Torso
   materials:
     importMaterials: 0
     materialName: 0
@@ -179,7 +181,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -197,7 +199,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c8e6aa9e6e7d6ca419d49feb8b6b7b5f,
+    type: 3}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0

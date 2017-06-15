@@ -1,114 +1,142 @@
 fileFormatVersion: 2
-guid: c8e6aa9e6e7d6ca419d49feb8b6b7b5f
-timeCreated: 1496331662
+guid: 737c9ef34c38c9640873f4a3ec39845b
+timeCreated: 1497480261
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: joint3
     100002: joint4
-    100004: polySurface63
-    100006: polySurface65
-    100008: polySurface66
-    100010: polySurface67
-    100012: polySurface68
-    100014: polySurface74
-    100016: polySurface75
-    100018: polySurface76
-    100020: polySurface77
-    100022: polySurface78
-    100024: Robodude_Head_TopSHJnt
-    100026: Robodude_l_Arm_ClavicleSHJnt
-    100028: Robodude_l_Arm_ElbowSHJnt
-    100030: Robodude_l_Arm_ShoulderSHJnt
-    100032: Robodude_l_Arm_WristSHJnt
-    100034: Robodude_l_Leg_AnkleSHJnt
-    100036: Robodude_l_Leg_BallSHJnt
-    100038: Robodude_l_Leg_HipSHJnt
-    100040: Robodude_l_Leg_Knee1SHJnt
-    100042: Robodude_l_Leg_Knee2SHJnt
-    100044: Robodude_l_Leg_ToeSHJnt
-    100046: Robodude_r_Arm_ClavicleSHJnt
-    100048: Robodude_r_Arm_ElbowSHJnt
-    100050: Robodude_r_Arm_ShoulderSHJnt
-    100052: Robodude_r_Arm_WristSHJnt
-    100054: Robodude_r_Leg_AnkleSHJnt
-    100056: Robodude_r_Leg_BallSHJnt
-    100058: Robodude_r_Leg_HipSHJnt
-    100060: Robodude_r_Leg_Knee1SHJnt
-    100062: Robodude_r_Leg_Knee2SHJnt
-    100064: Robodude_r_Leg_ToeSHJnt
-    100066: Robodude_ROOTSHJnt
-    100068: Robodude_SHJntGrp
-    100070: Robodude_Spine_01SHJnt
-    100072: Robodude_Spine_02SHJnt
-    100074: Robodude_Spine_03SHJnt
-    100076: Robodude_Spine_04SHJnt
-    100078: Robodude_Spine_05SHJnt
-    100080: Robodude_Spine_TopSHJnt
-    100082: //RootNode
-    100084: transform62
-    100086: transform63
+    100004: L_arm
+    100006: L_arm 1
+    100008: L_Leg
+    100010: L_Shoulder
+    100012: Legs
+    100014: polySurface61
+    100016: polySurface69
+    100018: polySurface70
+    100020: polySurface71
+    100022: polySurface72
+    100024: polySurface73
+    100026: polySurface74
+    100028: R_arm
+    100030: R_arm 1
+    100032: R_Leg
+    100034: R_Shoulder
+    100036: Robodude_Head_TopSHJnt
+    100038: Robodude_l_Arm_ClavicleSHJnt
+    100040: Robodude_l_Arm_ElbowSHJnt
+    100042: Robodude_l_Arm_ShoulderSHJnt
+    100044: Robodude_l_Arm_WristSHJnt
+    100046: Robodude_l_Leg_AnkleSHJnt
+    100048: Robodude_l_Leg_BallSHJnt
+    100050: Robodude_l_Leg_HipSHJnt
+    100052: Robodude_l_Leg_Knee1SHJnt
+    100054: Robodude_l_Leg_Knee2SHJnt
+    100056: Robodude_l_Leg_ToeSHJnt
+    100058: Robodude_r_Arm_ClavicleSHJnt
+    100060: Robodude_r_Arm_ElbowSHJnt
+    100062: Robodude_r_Arm_ShoulderSHJnt
+    100064: Robodude_r_Arm_WristSHJnt
+    100066: Robodude_r_Leg_AnkleSHJnt
+    100068: Robodude_r_Leg_BallSHJnt
+    100070: Robodude_r_Leg_HipSHJnt
+    100072: Robodude_r_Leg_Knee1SHJnt
+    100074: Robodude_r_Leg_Knee2SHJnt
+    100076: Robodude_r_Leg_ToeSHJnt
+    100078: Robodude_ROOTSHJnt
+    100080: Robodude_SHJntGrp
+    100082: Robodude_Spine_01SHJnt
+    100084: Robodude_Spine_02SHJnt
+    100086: Robodude_Spine_03SHJnt
+    100088: Robodude_Spine_04SHJnt
+    100090: Robodude_Spine_05SHJnt
+    100092: Robodude_Spine_TopSHJnt
+    100094: //RootNode
+    100096: Torso
+    100098: transform55
+    100100: transform56
+    100102: transform57
+    100104: transform58
+    100106: transform59
+    100108: transform60
+    100110: transform61
+    100112: transform62
+    100114: transform63
     400000: joint3
     400002: joint4
-    400004: polySurface63
-    400006: polySurface65
-    400008: polySurface66
-    400010: polySurface67
-    400012: polySurface68
-    400014: polySurface74
-    400016: polySurface75
-    400018: polySurface76
-    400020: polySurface77
-    400022: polySurface78
-    400024: Robodude_Head_TopSHJnt
-    400026: Robodude_l_Arm_ClavicleSHJnt
-    400028: Robodude_l_Arm_ElbowSHJnt
-    400030: Robodude_l_Arm_ShoulderSHJnt
-    400032: Robodude_l_Arm_WristSHJnt
-    400034: Robodude_l_Leg_AnkleSHJnt
-    400036: Robodude_l_Leg_BallSHJnt
-    400038: Robodude_l_Leg_HipSHJnt
-    400040: Robodude_l_Leg_Knee1SHJnt
-    400042: Robodude_l_Leg_Knee2SHJnt
-    400044: Robodude_l_Leg_ToeSHJnt
-    400046: Robodude_r_Arm_ClavicleSHJnt
-    400048: Robodude_r_Arm_ElbowSHJnt
-    400050: Robodude_r_Arm_ShoulderSHJnt
-    400052: Robodude_r_Arm_WristSHJnt
-    400054: Robodude_r_Leg_AnkleSHJnt
-    400056: Robodude_r_Leg_BallSHJnt
-    400058: Robodude_r_Leg_HipSHJnt
-    400060: Robodude_r_Leg_Knee1SHJnt
-    400062: Robodude_r_Leg_Knee2SHJnt
-    400064: Robodude_r_Leg_ToeSHJnt
-    400066: Robodude_ROOTSHJnt
-    400068: Robodude_SHJntGrp
-    400070: Robodude_Spine_01SHJnt
-    400072: Robodude_Spine_02SHJnt
-    400074: Robodude_Spine_03SHJnt
-    400076: Robodude_Spine_04SHJnt
-    400078: Robodude_Spine_05SHJnt
-    400080: Robodude_Spine_TopSHJnt
-    400082: //RootNode
-    400084: transform62
-    400086: transform63
-    4300000: polySurface66
-    4300002: polySurface68
-    4300004: polySurface75
-    4300006: polySurface76
-    4300008: polySurface77
-    4300010: polySurface78
-    4300012: polySurface74
-    7400000: death
+    400004: L_arm
+    400006: L_arm 1
+    400008: L_Leg
+    400010: L_Shoulder
+    400012: Legs
+    400014: polySurface61
+    400016: polySurface69
+    400018: polySurface70
+    400020: polySurface71
+    400022: polySurface72
+    400024: polySurface73
+    400026: polySurface74
+    400028: R_arm
+    400030: R_arm 1
+    400032: R_Leg
+    400034: R_Shoulder
+    400036: Robodude_Head_TopSHJnt
+    400038: Robodude_l_Arm_ClavicleSHJnt
+    400040: Robodude_l_Arm_ElbowSHJnt
+    400042: Robodude_l_Arm_ShoulderSHJnt
+    400044: Robodude_l_Arm_WristSHJnt
+    400046: Robodude_l_Leg_AnkleSHJnt
+    400048: Robodude_l_Leg_BallSHJnt
+    400050: Robodude_l_Leg_HipSHJnt
+    400052: Robodude_l_Leg_Knee1SHJnt
+    400054: Robodude_l_Leg_Knee2SHJnt
+    400056: Robodude_l_Leg_ToeSHJnt
+    400058: Robodude_r_Arm_ClavicleSHJnt
+    400060: Robodude_r_Arm_ElbowSHJnt
+    400062: Robodude_r_Arm_ShoulderSHJnt
+    400064: Robodude_r_Arm_WristSHJnt
+    400066: Robodude_r_Leg_AnkleSHJnt
+    400068: Robodude_r_Leg_BallSHJnt
+    400070: Robodude_r_Leg_HipSHJnt
+    400072: Robodude_r_Leg_Knee1SHJnt
+    400074: Robodude_r_Leg_Knee2SHJnt
+    400076: Robodude_r_Leg_ToeSHJnt
+    400078: Robodude_ROOTSHJnt
+    400080: Robodude_SHJntGrp
+    400082: Robodude_Spine_01SHJnt
+    400084: Robodude_Spine_02SHJnt
+    400086: Robodude_Spine_03SHJnt
+    400088: Robodude_Spine_04SHJnt
+    400090: Robodude_Spine_05SHJnt
+    400092: Robodude_Spine_TopSHJnt
+    400094: //RootNode
+    400096: Torso
+    400098: transform55
+    400100: transform56
+    400102: transform57
+    400104: transform58
+    400106: transform59
+    400108: transform60
+    400110: transform61
+    400112: transform62
+    400114: transform63
+    4300000: L_Leg
+    4300002: R_Leg
+    4300004: L_arm
+    4300006: L_Shoulder
+    4300008: R_arm
+    4300010: R_Shoulder
+    4300012: Torso
+    7400000: Take 001
     9500000: //RootNode
-    13700000: polySurface66
-    13700002: polySurface68
-    13700004: polySurface74
-    13700006: polySurface75
-    13700008: polySurface76
-    13700010: polySurface77
-    13700012: polySurface78
+    13700000: L_arm 1
+    13700002: L_Leg
+    13700004: L_Shoulder
+    13700006: R_arm 1
+    13700008: R_Leg
+    13700010: R_Shoulder
+    13700012: Torso
   materials:
     importMaterials: 0
     materialName: 0
@@ -131,123 +159,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: death
-      takeName: Take 001
-      firstFrame: 6
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: polySurface63
-        weight: 1
-      - path: polySurface63/polySurface66
-        weight: 1
-      - path: polySurface63/polySurface68
-        weight: 1
-      - path: polySurface65
-        weight: 1
-      - path: polySurface65/polySurface75
-        weight: 1
-      - path: polySurface65/polySurface76
-        weight: 1
-      - path: polySurface65/transform62
-        weight: 1
-      - path: polySurface67
-        weight: 1
-      - path: polySurface67/polySurface77
-        weight: 1
-      - path: polySurface67/polySurface78
-        weight: 1
-      - path: polySurface67/transform63
-        weight: 1
-      - path: polySurface74
-        weight: 1
-      - path: Robodude_SHJntGrp
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_l_Leg_HipSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_l_Leg_HipSHJnt/Robodude_l_Leg_Knee1SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_l_Leg_HipSHJnt/Robodude_l_Leg_Knee1SHJnt/Robodude_l_Leg_Knee2SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_l_Leg_HipSHJnt/Robodude_l_Leg_Knee1SHJnt/Robodude_l_Leg_Knee2SHJnt/Robodude_l_Leg_AnkleSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_l_Leg_HipSHJnt/Robodude_l_Leg_Knee1SHJnt/Robodude_l_Leg_Knee2SHJnt/Robodude_l_Leg_AnkleSHJnt/Robodude_l_Leg_BallSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_l_Leg_HipSHJnt/Robodude_l_Leg_Knee1SHJnt/Robodude_l_Leg_Knee2SHJnt/Robodude_l_Leg_AnkleSHJnt/Robodude_l_Leg_BallSHJnt/Robodude_l_Leg_ToeSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_r_Leg_HipSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_r_Leg_HipSHJnt/Robodude_r_Leg_Knee1SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_r_Leg_HipSHJnt/Robodude_r_Leg_Knee1SHJnt/Robodude_r_Leg_Knee2SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_r_Leg_HipSHJnt/Robodude_r_Leg_Knee1SHJnt/Robodude_r_Leg_Knee2SHJnt/Robodude_r_Leg_AnkleSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_r_Leg_HipSHJnt/Robodude_r_Leg_Knee1SHJnt/Robodude_r_Leg_Knee2SHJnt/Robodude_r_Leg_AnkleSHJnt/Robodude_r_Leg_BallSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_r_Leg_HipSHJnt/Robodude_r_Leg_Knee1SHJnt/Robodude_r_Leg_Knee2SHJnt/Robodude_r_Leg_AnkleSHJnt/Robodude_r_Leg_BallSHJnt/Robodude_r_Leg_ToeSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_l_Arm_ClavicleSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_l_Arm_ClavicleSHJnt/Robodude_l_Arm_ShoulderSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_l_Arm_ClavicleSHJnt/Robodude_l_Arm_ShoulderSHJnt/joint3
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_l_Arm_ClavicleSHJnt/Robodude_l_Arm_ShoulderSHJnt/Robodude_l_Arm_ElbowSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_l_Arm_ClavicleSHJnt/Robodude_l_Arm_ShoulderSHJnt/Robodude_l_Arm_ElbowSHJnt/Robodude_l_Arm_WristSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_r_Arm_ClavicleSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_r_Arm_ClavicleSHJnt/Robodude_r_Arm_ShoulderSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_r_Arm_ClavicleSHJnt/Robodude_r_Arm_ShoulderSHJnt/joint4
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_r_Arm_ClavicleSHJnt/Robodude_r_Arm_ShoulderSHJnt/Robodude_r_Arm_ElbowSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_r_Arm_ClavicleSHJnt/Robodude_r_Arm_ShoulderSHJnt/Robodude_r_Arm_ElbowSHJnt/Robodude_r_Arm_WristSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_Spine_05SHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_Spine_05SHJnt/Robodude_Spine_TopSHJnt
-        weight: 1
-      - path: Robodude_SHJntGrp/Robodude_ROOTSHJnt/Robodude_Spine_01SHJnt/Robodude_Spine_02SHJnt/Robodude_Spine_03SHJnt/Robodude_Spine_04SHJnt/Robodude_Spine_05SHJnt/Robodude_Spine_TopSHJnt/Robodude_Head_TopSHJnt
-        weight: 1
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

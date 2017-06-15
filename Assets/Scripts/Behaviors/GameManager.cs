@@ -22,11 +22,10 @@ public class GameManager : MonoBehaviour
     private bool _isPaused;
     private int minuteCounter = 0;
     private int _roundCounter = 1;
-    public int _enemyLimit;
-    public int _enemySpawnCap;
+    private int _enemyLimit;
+    private int _enemySpawnCap;
     private int _enemiesSpawned;
-    private float randomEnemy;
-    private float randomSpawn;
+    private float randomEnemy;    
     #endregion
 
     private GameObject _buttonpanel;
@@ -98,11 +97,22 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region //RANDOM NUMBERS
+    private float pusherChance = .5f;
+    private float playerattackerChance = .5f;
+    private float towerattackerChance = .2f;
+    #endregion
+
     private void Populate()
     {
         if(_enemies.Count < _enemyLimit && _enemiesSpawned != _enemySpawnCap)
         {
             //SPAWN MORE ENEMIES
+            //SPAWN 1-4 IN ORDER
+            for(int spawn = 0; spawn < _enemyLimit; spawn++)
+            {
+
+            }
             
         }
     }
@@ -228,9 +238,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _enemies = new List<GameObject>();    
-        _isPaused = false;
-        randomSpawn = UnityEngine.Random.Range(0, 2);
+        _isPaused = false; 
         randomEnemy = UnityEngine.Random.Range(0, 1);
+        _enemyLimit = 4;
+        _enemySpawnCap = 10;
         _enemiesSpawned = 0;
         _roundTimer = Time.time;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
