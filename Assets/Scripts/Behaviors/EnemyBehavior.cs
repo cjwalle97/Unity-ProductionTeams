@@ -26,15 +26,15 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
+        EnemyConfig = ScriptableObject.CreateInstance<Enemy>();
         EnemyConfig.Health = Health;
         EnemyConfig.Damage = Damage;
-        EnemyConfig.Alive = true;
-        
+        EnemyConfig.Alive = true;        
     }
 
     void FixedUpdate()
     {
-        Agent.SetDestination(Target.position);
+        Agent.SetDestination(Target.position);        
     }
 
     // Update is called once per frame
@@ -84,9 +84,9 @@ public class EnemyBehavior : MonoBehaviour
         if (ShotTime % 30 == 0 && EnemyConfig.Alive == true)
         {
             otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
+            otherAmmo.GetComponent<JunkBulletBehaviour>().SetOwner(EnemyConfig);
             otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
             Destroy(otherAmmo, 3f);
         }
     }
-
 }

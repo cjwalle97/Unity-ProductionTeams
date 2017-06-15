@@ -122,16 +122,17 @@ public class GameManager : MonoBehaviour
 
             if (randomEnemy <= .51f && _enemiesSpawned != _enemySpawnCap)
             {
-                //var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                var playerAttacker = Instantiate(Resources.Load("RuntimePrefabs/PlayerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                //playerAttacker.GetComponent<EnemyBehavior>().Ammo.GetComponent<JunkBulletBehaviour>().SetOwner(playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig);
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Health = 100.0f;
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Damage = 10.0f;
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
-                //_enemies.Add(playerAttacker);
-                //_enemiesSpawned += 1;
-                //_spawnIndex += 1;
-                //_spawnTimer = 0f;
-                //Debug.Log("playerattackerspawned");
-                //return true;
+                _enemies.Add(playerAttacker);
+                _enemiesSpawned += 1;
+                _spawnIndex += 1;
+                _spawnTimer = 0f;
+                Debug.Log("playerattackerspawned");
+                return true;
             }
 
             if(randomEnemy <= .5f && _enemiesSpawned != _enemySpawnCap)
