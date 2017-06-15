@@ -161,7 +161,6 @@ public class GameManager : MonoBehaviour
                 //_spawnTimer = 0f;
                 //return true;
             }
-
             return false;
         }
 
@@ -276,7 +275,7 @@ public class GameManager : MonoBehaviour
         _enemies = new List<GameObject>();
         _isPaused = false;
         randomEnemy = Random.Range(0f, 1f);
-        _enemyLimit = 2;
+        _enemyLimit = 4;
         _enemySpawnCap = 10;
         _enemiesSpawned = 0;
         _spawnIndex = 0;
@@ -298,5 +297,6 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         //Debug.Log(_roundTimer);
         //Debug.Log(minuteCounter);
+        Debug.Log("Spawned: :" + _enemiesSpawned);
     }
 }
