@@ -693,7 +693,7 @@ MonoBehaviour:
   - {fileID: 1196084937}
   - {fileID: 1196084938}
   PayloadSpawn: {fileID: 1196084935}
-  randomEnemy: 0
+  PlayerSpawn: {fileID: 1699353494}
 --- !u!4 &1632400661
 Transform:
   m_ObjectHideFlags: 0
@@ -746,6 +746,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114495858303283450, guid: d4849bef2a3915b46bc89ec9a9124b3d,
+        type: 2}
+      propertyPath: PayloadSpawn
+      value: 
+      objectReference: {fileID: 1196084935}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4849bef2a3915b46bc89ec9a9124b3d, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1699353494 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4164209044054684, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}

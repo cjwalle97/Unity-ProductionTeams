@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c98bb053bbc6947a557382f33fcdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PayloadSpawn: {fileID: 0}
   PusherTarget: {fileID: 4021607340123642}
   PusherEffort: 0
 --- !u!135 &135275358241870046

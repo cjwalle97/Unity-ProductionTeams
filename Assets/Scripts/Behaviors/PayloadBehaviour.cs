@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class PayloadBehaviour : MonoBehaviour {
 
+    public Transform PayloadSpawn;
     private Transform _target;
     public Transform PusherTarget;
     public float PusherEffort;
@@ -17,7 +18,7 @@ public class PayloadBehaviour : MonoBehaviour {
         _target = GameObject.FindGameObjectWithTag("Tower").transform;
         _ani = GetComponent<Animator>();
         _route = GetComponent<NavMeshAgent>();
-        _route.speed = 2.0f;
+        _route.speed = 1.0f;
         _route.SetDestination(_target.position);
 	}
 	
@@ -26,13 +27,24 @@ public class PayloadBehaviour : MonoBehaviour {
     {
         //_target = GameObject.FindGameObjectWithTag("Tower").transform;
         //_route.SetDestination(_target.position);
+        
     }
 
     private void FixedUpdate()
     {   
         _target = GameObject.FindGameObjectWithTag("Tower").transform;
         _route.acceleration = PusherEffort;
-        _route.destination = _target.position;
+        //_route.destination = _target.position;
+
+        if (_route.acceleration < 1.0f)
+        {
+            _route.destination = PayloadSpawn.position;
+        }
+
+        if (_route.acceleration > 0.0f)
+        {
+            _route.destination = _target.position;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
