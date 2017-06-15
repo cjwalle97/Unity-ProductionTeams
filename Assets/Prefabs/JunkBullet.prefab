@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 114415582249281262}
   m_Layer: 0
   m_Name: JunkBullet
-  m_TagString: Untagged
+  m_TagString: JunkBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public List<Transform> EnemySpawn;
     public Transform PayloadSpawn;
+    public Transform PlayerSpawn;
 
     private float _roundTimer;
     private float _spawnTimer;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     private int _enemySpawnCap;
     private int _enemiesSpawned;
     private int _spawnIndex;
+    private int _enemiesLeft;
     #endregion
 
     #region //GAMESTATE
@@ -46,69 +48,92 @@ public class GameManager : MonoBehaviour
         _buttonpanel.SetActive(true);
 
         var _player = GameObject.FindGameObjectWithTag("Player");
-        var _enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var _pushers = GameObject.FindGameObjectsWithTag("PayloadPusher");
         var _payload = GameObject.FindGameObjectWithTag("Payload");
+        var _enemybullets = GameObject.FindGameObjectsWithTag("JunkBullet");
+        var _playerbullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
+
+        var enemies = Gather();        
+        var enemyBullets = _enemybullets.ToList<GameObject>();
+        var playerBullets = _playerbullets.ToList<GameObject>();
+
+        enemies.ForEach(enemy => { enemy.GetComponent<Rigidbody>().isKinematic = true; });
+        enemyBullets.ForEach(bullet => { bullet.GetComponent<Rigidbody>().isKinematic = true; });
+        playerBullets.ForEach(bullet => { bullet.GetComponent<Rigidbody>().isKinematic = true; });
 
         _player.GetComponent<Rigidbody>().isKinematic = true;
         _payload.GetComponent<Rigidbody>().isKinematic = true;
-
-        foreach (var enemy in _enemies)
-        {
-            enemy.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        foreach (var pusher in _pushers)
-        {
-            pusher.GetComponent<Rigidbody>().isKinematic = true;
-        }
     }
+
     private void ResumeGame()
     {
         var _player = GameObject.FindGameObjectWithTag("Player");
-        var _enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        var _pushers = GameObject.FindGameObjectsWithTag("PayloadPusher");
         var _payload = GameObject.FindGameObjectWithTag("Payload");
+        var _enemybullets = GameObject.FindGameObjectsWithTag("JunkBullet");
+        var _playerbullets = GameObject.FindGameObjectsWithTag("PlayerBullet");
+
+        var enemies = Gather();
+        var enemyBullets = _enemybullets.ToList<GameObject>();
+        var playerBullets = _playerbullets.ToList<GameObject>();
+
+        enemies.ForEach(enemy => { enemy.GetComponent<Rigidbody>().isKinematic = false; });
+        enemyBullets.ForEach(bullet => { bullet.GetComponent<Rigidbody>().isKinematic = false; });
+        playerBullets.ForEach(bullet => { bullet.GetComponent<Rigidbody>().isKinematic = false; });
 
         _player.GetComponent<Rigidbody>().isKinematic = false;
         _payload.GetComponent<Rigidbody>().isKinematic = false;
 
-        foreach (var enemy in _enemies)
-        {
-            enemy.GetComponent<Rigidbody>().isKinematic = false;
-        }
-        foreach (var pusher in _pushers)
-        {
-            pusher.GetComponent<Rigidbody>().isKinematic = false;
-        }
-
-        _buttonpanel.SetActive(false);
-
         Time.timeScale = 1.0f;
+        _buttonpanel.SetActive(false);
         _isPaused = false;
     }
-    //NEEDS WORK
-    public void SaveGame()
-    {
-        //NEEDS WORK
-    }
+
     public void QuitGame()
     {
         Debug.Log("Exit Game");
         Application.Quit();
     }
     #endregion
+    
+    private void NextRound()
+    {
+        Time.timeScale = 0.0f;
+        Debug.Log("GOING TO NEXT ROUND");
+        //IF ANY ENEMIES LEFT, GATHER AND DELETE
+        //INCREMENT ROUND NUMBER
+        //RESET PLAYER POSITION TO 'PLAYERSPAWN'
+        
 
-    #region //RANDOM NUMBERS
-    public float randomEnemy;
-    private float pusherChance = .5f;
-    private float playerattackerChance = .5f;
-    private float towerattackerChance = .2f;
-    #endregion
+        _roundCounter += 1;
+        _spawnTimer = 0.0f;
+        minuteCounter = 0;
+        _enemyLimit += 1;
+        _enemySpawnCap += 10;
+        _enemiesLeft = _enemySpawnCap;
+        _spawnIndex = 0;
 
-    //DOES NOT LIMIT THE SPAWNING OF ENEMIES
+        for(int i = 0; i < _enemyLimit; i++)
+        {
+            var enemies = Gather();
+
+            for (int enemy = 0; enemy < enemies.Count; enemy++)
+            {
+                Destroy(enemies[enemy]);
+            }
+
+            var payload = GameObject.FindGameObjectWithTag("Payload");
+            payload.transform.position = PayloadSpawn.position;
+            payload.transform.rotation = PayloadSpawn.rotation;
+
+            var player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = PlayerSpawn.position;
+            player.transform.rotation = PlayerSpawn.rotation;
+        }        
+
+        Time.timeScale = 1.0f;
+    }
+
     private void Populate()
     {
-        randomEnemy = Random.Range(0f, 1f);
         _spawnTimer += Time.deltaTime;
 
         if (_spawnTimer >= 12.0f && _enemiesSpawned != _enemySpawnCap)
@@ -129,35 +154,38 @@ public class GameManager : MonoBehaviour
                 //playerAttacker.GetComponent<EnemyBehavior>().EnemyConfig.Alive = true;
                 _enemies.Add(playerAttacker);
                 _enemiesSpawned += 1;
+                _enemiesLeft -= 1;
                 _spawnIndex += 1;
                 _spawnTimer = 0f;
                 Debug.Log("playerattackerspawned");
                 //return true;
             }
 
-            if(_enemiesSpawned != _enemySpawnCap)
+            if (_enemiesSpawned != _enemySpawnCap)
             {
-                var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusherPrefab"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                var payloadPusher = Instantiate(Resources.Load("RuntimePrefabs/PayloadPusher"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
                 //DO A NULL CHECK HERE
                 //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Health = 50.0f;
                 //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Damage = 1.0f;
                 //payloadPusher.GetComponent<PayloadPusherBehaviour>().Pusher.Alive = true;
                 _enemies.Add(payloadPusher);
                 _enemiesSpawned += 1;
+                _enemiesLeft -= 1;
                 _spawnIndex += 1;
                 _spawnTimer = 0f;
                 //return true;
                 Debug.Log("payloadpusherspawned");
             }
 
-            if(_enemiesSpawned != _enemySpawnCap && _roundCounter > 5)
+            if(_enemiesSpawned != _enemySpawnCap && _roundCounter >= 5)
             {
-                var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttacker"), EnemySpawn[_spawnIndex].position, EnemySpawn[_spawnIndex].rotation) as GameObject;
+                var towerAttacker = Instantiate(Resources.Load("RuntimePrefabs/TowerAttacker"), EnemySpawn[4].position, EnemySpawn[4].rotation) as GameObject;
                 //towerAttacker.GetComponent<EnemyBehavior>().TowerAttacker.Health = 80.0f;
                 //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Damage = 8.0f;
                 //towerAttacker.GetComponent<TowerAttackerBehaviour>().TowerAttacker.Alive = true;
                 _enemies.Add(towerAttacker);
                 _enemiesSpawned += 1;
+                _enemiesLeft -= 1;
                 _spawnIndex += 1;
                 _spawnTimer = 0f;
                 //return true;
@@ -166,6 +194,25 @@ public class GameManager : MonoBehaviour
         }
 
         //return false;
+    }
+
+    private List<GameObject> Gather()
+    {
+        List<GameObject> gathered = new List<GameObject>();
+
+        //PUSHERS
+        //ATTACKERS
+        //TOWERATTACKERS
+        var attackers = GameObject.FindGameObjectsWithTag("Enemy");
+        var pushers = GameObject.FindGameObjectsWithTag("PayloadPusher");
+
+        var enemylist = attackers.ToList<GameObject>();
+        var pusherlist = pushers.ToList<GameObject>();
+
+        enemylist.ForEach(enemy => { gathered.Add(enemy); });
+        pusherlist.ForEach(pusher => { gathered.Add(pusher); });
+
+        return gathered;
     }
 
     private bool GameLoop()
@@ -177,6 +224,8 @@ public class GameManager : MonoBehaviour
             if (minuteCounter == 5)
             {
                 Debug.Log("GOTO NEXT ROUND");
+                NextRound();
+                return true;
             }
 
             if(_enemies.Count > _enemyLimit)
@@ -191,6 +240,7 @@ public class GameManager : MonoBehaviour
             if (_enemies.Count <= 0)
             {
                 Debug.Log("GOTO NEXT ROUND");
+                //NextRound();
             }
 
             //PAUSE THE GAME
@@ -260,7 +310,7 @@ public class GameManager : MonoBehaviour
         var timerText = GameObject.FindGameObjectWithTag("RoundTimer");
 
 
-        enemyCountText.text = "Count: " + _enemies.Count().ToString();
+        enemyCountText.text = "Count: " + _enemiesLeft.ToString();
         timerText.GetComponent<Text>().text = _roundTime();
         roundText.GetComponent<Text>().text = _roundCounter.ToString();
     }
@@ -270,10 +320,10 @@ public class GameManager : MonoBehaviour
     {
         _enemies = new List<GameObject>();
         _isPaused = false;
-        randomEnemy = Random.Range(0f, 1f);
         _enemyLimit = 4;
         _enemySpawnCap = 10;
         _enemiesSpawned = 0;
+        _enemiesLeft = _enemySpawnCap;
         _spawnIndex = 0;
         _roundTimer = Time.time;
         _spawnTimer = Time.time;
@@ -287,7 +337,7 @@ public class GameManager : MonoBehaviour
     {
         //UPDATE UI WITH COUNT OF ENEMIES
         //AFTER PUSHER DIES, UI DOSENT UPDATE
-        Populate();
+        //Populate();
         UpdateEnemies();
         GameLoop();
         UpdateUI();
