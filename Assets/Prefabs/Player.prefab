@@ -3337,6 +3337,7 @@ MonoBehaviour:
     m_TypeName: PlayerBehaviour+OnPlayerHealthChange, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   shotCooldown: 1
+  AIMSHOOT: 1877016939
 --- !u!136 &136317274552339766
 CapsuleCollider:
   m_ObjectHideFlags: 1
