@@ -72,13 +72,21 @@ public class PlayerBehaviour : MonoBehaviour
         StartCoroutine(ShotCooldown(shotCooldown));
     }
 
+    void Death()
+    {
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //this.enabled = false;
+    }
+
     bool CheckIfAlive()
     {
-        if(_player.Alive)
+        if(_player.Health <= 0.0f)
         {
-            return true;
+            _player.Alive = false;
+            return false;
         }
-        return false;
+        return true;
     }
 
     //RESEARCH THIS
@@ -138,10 +146,15 @@ public class PlayerBehaviour : MonoBehaviour
             _player.Health += 25;
         }
 
-        _animator.SetBool("Alive", CheckIfAlive());
+        if(CheckIfAlive() == false)
+        {
+            _animator.SetBool("Alive", false);
+            Death();
+        }
+
+        _animator.SetBool("Alive", _player.Alive);
         onPlayerHealthChange.Invoke(_player.Health);
     }
-    
 
     void FixedUpdate()
     {
