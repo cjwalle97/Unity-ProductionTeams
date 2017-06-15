@@ -12,4 +12,3 @@ MonoBehaviour:
   m_Name: PlayerAttacker
   m_EditorClassIdentifier: 
   Alive: 1
-  Attacker: 1
