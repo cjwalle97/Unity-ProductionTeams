@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class TowerBehaviour : MonoBehaviour {
 
@@ -28,5 +29,10 @@ public class TowerBehaviour : MonoBehaviour {
 	void Update ()
     {
         onTowerHealthChange.Invoke(_tower.Health);
+
+        if(_tower.Health <= 0.0f)
+        {
+            SceneManager.LoadScene("4.gameover");
+        }
 	}
 }
