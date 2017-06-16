@@ -16,5 +16,4 @@ public class Player : ScriptableObject, IDamageable, IDamager
     {
         damageable.Health -= Damage;
     }
-    
 }

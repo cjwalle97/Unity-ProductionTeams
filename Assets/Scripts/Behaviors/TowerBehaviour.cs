@@ -18,17 +18,15 @@ public class TowerBehaviour : MonoBehaviour {
     {
         _tower = ScriptableObject.CreateInstance<Tower>();
     }
-    // Use this for initialization
-    void Start () {
-        
+    
+    void Start ()
+    {   
         _tower.MaxHealth = TowerMaxHealth;
         _tower.Health = TowerHealth;
     }
 	
-	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
         onTowerHealthChange.Invoke(_tower.Health);
-
 	}
 }
