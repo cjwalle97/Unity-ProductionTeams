@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -69,34 +70,50 @@ public class PlayerBehaviour : MonoBehaviour
     public float shotCooldown = 1f;
     void Shoot()
     {
-        StartCoroutine(ShotCooldown(shotCooldown));
+        //3 ROUND BURST
+        _animator.SetBool(AIMSHOOT, true);
+    }
+    public int AIMSHOOT = Animator.StringToHash("Shooting");
+    void Death()
+    {
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        SceneManager.LoadScene("4.gameover");
+        //this.enabled = false;
     }
 
     bool CheckIfAlive()
     {
-        if(_player.Alive)
+        if(_player.Health <= 0.0f)
         {
-            return true;
+            _player.Alive = false;
+            return false;
         }
-        return false;
+        return true;
     }
 
     //RESEARCH THIS
+    bool canshoot, shooting;
     IEnumerator ShotCooldown(float timer)
     {
         if (shooting)
             yield return null;
         shooting = true;
         var countdown = timer;
-        var _bullet = Instantiate(Ammunition, _bulletspawn.position, _bulletspawn.localRotation);
-        _bullet.GetComponent<Rigidbody>().velocity += _bulletspawn.forward * BulletSpeed;
-        Destroy(_bullet, 2.0f);
+        
         while (countdown >= 0)
         {
             countdown -= Time.deltaTime;
             yield return null;
         }
         shooting = false;
+    }
+
+    public void ShotFire()
+    {
+        var _bullet = Instantiate(Ammunition, _bulletspawn.position, _bulletspawn.rotation);
+        _bullet.GetComponent<Rigidbody>().velocity += _bulletspawn.forward * BulletSpeed;
+        Destroy(_bullet, 2.0f);
     }
 
     // Use this for initialization
@@ -124,23 +141,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         //transform.position += new Vector3(h, 0, v);
         //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-
-        if(Input.GetKeyDown(KeyCode.F4))
+        
+        if(CheckIfAlive() == false)
         {
-            Debug.Log("PlayerTakeDamage");
-            _player.DoDamage(_player);
+            _animator.SetBool("Alive", false);
+            Death();
         }
 
-        if(Input.GetKeyDown(KeyCode.F3))
-        {
-            Debug.Log("PlayerHealthIncrease");
-            _player.Health += 25;
-        }
-
-        _animator.SetBool("Alive", CheckIfAlive());
+        _animator.SetBool("Alive", _player.Alive);
         onPlayerHealthChange.Invoke(_player.Health);
     }
-    bool canshoot, shooting;
 
     void FixedUpdate()
     {
@@ -148,17 +158,23 @@ public class PlayerBehaviour : MonoBehaviour
 
         _animator.SetBool("Shooting", shooting);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Shoot();
+        //}
+
+        //RESEARCH THIS
+        canshoot = _rightTrigger >= .5f;        
+        //if(canshoot && !shooting)
+        //{      
+        //    Shoot();
+        //}
+
+        if(LookAround() != Vector3.zero && canshoot)
         {
             Shoot();
         }
 
-        //RESEARCH THIS
-        canshoot = _rightTrigger >= .5f;        
-        if(canshoot && !shooting)
-        {      
-            Shoot();
-        }
 
         if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
         {

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,10 +25,15 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         Target = GameObject.FindGameObjectWithTag(TargetTag).transform;
+        EnemyConfig = ScriptableObject.CreateInstance<Enemy>();
         EnemyConfig.Health = Health;
         EnemyConfig.Damage = Damage;
-        EnemyConfig.Alive = true;
-        
+        EnemyConfig.Alive = true;        
+    }
+
+    void FixedUpdate()
+    {
+        Agent.SetDestination(Target.position);        
     }
 
     // Update is called once per frame
@@ -42,7 +46,7 @@ public class EnemyBehavior : MonoBehaviour
             EnemyConfig.Alive = false;
         }
         CheckIfAlive();
-        Agent.SetDestination(Target.position);
+        
         if (Agent.remainingDistance > Agent.stoppingDistance)
         {
             ShotTime = 0f;
@@ -50,10 +54,19 @@ public class EnemyBehavior : MonoBehaviour
         }
         else
         {
+            EnemyAnimator.SetBool("Target in Range", true);
             ShotTime += 1f;
+            Aim();
             Shoot();
         }
+        
+    }
 
+    private void Aim()
+    {
+        Vector3 direction = Target.position - _location.position;
+        Quaternion lookhere = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(_location.rotation, lookhere, Time.deltaTime * 2);
     }
 
     public void CheckIfAlive()
@@ -67,14 +80,12 @@ public class EnemyBehavior : MonoBehaviour
     
     public void Shoot()
     {
-        EnemyAnimator.SetBool("Target in Range", true);
-        if (ShotTime % 15 == 0)
+        if (ShotTime % 30 == 0 && EnemyConfig.Alive == true)
         {
             otherAmmo = Instantiate(Ammo, _location.position, gameObject.transform.localRotation);
+            otherAmmo.GetComponent<JunkBulletBehaviour>().SetOwner(EnemyConfig);
             otherAmmo.GetComponent<Rigidbody>().velocity += gameObject.transform.forward * BulletSpeed;
             Destroy(otherAmmo, 3f);
         }
     }
-
-
 }

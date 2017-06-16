@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 114554401993468080}
   m_Layer: 0
   m_Name: PlayerBulletPrefab
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,7 +283,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1651444318728354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8600397, y: 0.54240775, z: -1.8044596}
+  m_LocalPosition: {x: -21.12143, y: 0.826, z: 21.762756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4511025954376974}
@@ -353,7 +353,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c6f5ddfbc2725d9478cda1309d3cbe21, type: 2}
+  - {fileID: 2100000, guid: bfcc6970509035645a9d17ce7a8380ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
