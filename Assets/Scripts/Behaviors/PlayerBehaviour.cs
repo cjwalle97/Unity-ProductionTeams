@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class PlayerBehaviour : MonoBehaviour
 {
     #region //MEMEBER VARIABLES
-    
     public Player _player;
     public float PlayerHealth = 100;
     public float PlayerMaxHealth = 100;
@@ -20,8 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Animator _animator;
     private float deathCounter = 0;
     private int deathCount = 0;
-
-    //SETUP EVENT FOR PLAYER HEALTH CHANGE
+    
     [System.Serializable]
     public class OnPlayerHealthChange : UnityEvent<float> { }
     public OnPlayerHealthChange onPlayerHealthChange;
@@ -37,15 +35,9 @@ public class PlayerBehaviour : MonoBehaviour
         //var _hori = Input.GetAxis("HorizontalArrow");
         //var _vert = Input.GetAxis("VerticalArrow");
 
-        //_animator.SetFloat("AimMovement", Mathf.Abs(_hori));
-        //_animator.SetFloat("AimMovement", Mathf.Abs(_vert));
-
         _animator.SetFloat("AimMovement", Mathf.Abs(_hori) + Mathf.Abs(_vert));
 
-        //Debug.Log(_hori);
-
         Vector3 _direction = new Vector3(_hori, 0, _vert);
-
         return _direction.normalized;
     }
 
@@ -58,28 +50,22 @@ public class PlayerBehaviour : MonoBehaviour
         //WSAD CONTROLL
         //var h = Input.GetAxis("Horizontal");
         //var v = Input.GetAxis("Vertical");
-
-        //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
-        //_animator.SetFloat("WalkMovement", Mathf.Abs(v));
-
+        
         _animator.SetFloat("WalkMovement", Mathf.Abs(h) + Mathf.Abs(v));
 
         Vector3 _direction = new Vector3(h, 0, v);
-
         return _direction.normalized;
     }
     
     void Shoot()
     {
-        //3 ROUND BURST
         _animator.SetBool(AIMSHOOT, true);
     }
 
     public int AIMSHOOT = Animator.StringToHash("Shooting");
     void Death()
     {
-        SceneManager.LoadScene("4.gameover");
-        //this.enabled = false;
+        SceneManager.LoadScene("4.gameover");     
     }
 
     bool CheckIfAlive()
@@ -106,7 +92,6 @@ public class PlayerBehaviour : MonoBehaviour
         _player = ScriptableObject.CreateInstance<Player>();
     }
 
-    // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -116,27 +101,16 @@ public class PlayerBehaviour : MonoBehaviour
         _player.Damage = PlayerDamage;
         _player.Alive = true;        
     }
-
-    // Update is called once per frame
+    
     void Update()
-    {
-        //_bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
-        //SETUP MOVEMENT
-        //SETUP CAMERA FOR PLAYER
-        //var h = Input.GetAxis("Horizontal");
-        //var v = Input.GetAxis("Vertical");
-
-        //var hSpin = Input.GetAxis("HorizontalArrow");
-
-        //transform.position += new Vector3(h, 0, v);
-        //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-        
+    {   
         if(CheckIfAlive() == false)
         {
             if(deathCount <= 0)
             {
                 _animator.SetBool("Alive", false);
             }
+
             deathCount += 1;
 
             if (deathCounter >= 3.0f)
@@ -164,12 +138,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
 
             _animator.SetBool("Shooting", shooting);
-
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    Shoot();
-            //}
-
+            
             canshoot = _rightTrigger >= .5f;
             if (canshoot && !shooting)
             {
@@ -197,8 +166,7 @@ public class PlayerBehaviour : MonoBehaviour
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
             }
 
-            transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;
-            //transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
+            transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;            
         }
     }
 }

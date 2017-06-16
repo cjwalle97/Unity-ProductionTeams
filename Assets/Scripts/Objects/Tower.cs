@@ -10,10 +10,7 @@ public class Tower : ScriptableObject, IDamageable
     public float _MaxHealth;
     public float Health
     {
-        get
-        {
-            return _health;
-        }
+        get { return _health; }
         set { _health = value; }
     }
     public float MaxHealth

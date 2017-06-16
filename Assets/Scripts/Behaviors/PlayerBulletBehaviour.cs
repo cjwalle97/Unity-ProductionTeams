@@ -12,11 +12,9 @@ public class PlayerBulletBehaviour : MonoBehaviour {
     }
 
 	private void OnTriggerEnter(Collider other)
-    {
-        
+    {   
         if(other.tag == "Enemy")
-        {
-            Debug.Log("ENEMYCollision");
+        {   
             _player.DoDamage(other.GetComponent<EnemyBehavior>().EnemyConfig);
             Destroy(gameObject);
         }

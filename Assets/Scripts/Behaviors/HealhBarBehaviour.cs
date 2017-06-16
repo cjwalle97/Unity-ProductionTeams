@@ -24,8 +24,7 @@ public class HealhBarBehaviour : MonoBehaviour
     {
         _towerHealth.value = health;
     }
-
-    // Use this for initialization
+    
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -40,7 +39,6 @@ public class HealhBarBehaviour : MonoBehaviour
         _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
     }
 
-    // Update is called once per frame
     void Update()
     {
         _player = GameObject.FindGameObjectWithTag("Player");

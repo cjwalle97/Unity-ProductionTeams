@@ -30,8 +30,8 @@ public class PayloadPusherBehaviour : MonoBehaviour {
         Destroy(gameObject, 2);
     }
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         _pusherAni = GetComponent<Animator>();
         _pusher = GetComponent<NavMeshAgent>();
         Pusher = ScriptableObject.CreateInstance<Enemy>();
@@ -45,26 +45,19 @@ public class PayloadPusherBehaviour : MonoBehaviour {
         _pusher.SetDestination(_target.position);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-        //_target = GameObject.FindGameObjectWithTag("Payload").GetComponent<PayloadBehaviour>().PusherTarget;
+	void Update ()
+    {   
         _pushing = Push();
         if(Pusher.Health <= 0.0f)
         {
             Dead();
         }
-        
 	}
 
     private void FixedUpdate()
     {
         _target = GameObject.FindGameObjectWithTag("Payload").GetComponent<PayloadBehaviour>().PusherTarget;
         _pusher.destination = _target.position;
-        //if (_pusher.remainingDistance > 50)
-        //{
-        //    _pusher.SetDestination(_target.position);
-        //}
 
         _pusherAni.SetBool("Alive", Pusher.Alive);
         _pusherAni.SetBool("Pushing", _pushing);

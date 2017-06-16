@@ -22,20 +22,11 @@ public class PayloadBehaviour : MonoBehaviour {
         _route.speed = 1.0f;
         _route.SetDestination(_target.position);
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        //_target = GameObject.FindGameObjectWithTag("Tower").transform;
-        //_route.SetDestination(_target.position);
-        
-    }
 
     private void FixedUpdate()
     {   
         _target = GameObject.FindGameObjectWithTag("Tower").transform;
         _route.acceleration = PusherEffort;
-        //_route.destination = _target.position;
     }
 
     private void OnTriggerEnter(Collider other)

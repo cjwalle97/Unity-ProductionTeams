@@ -12,19 +12,17 @@ public class MainCameraBehaviour : MonoBehaviour {
     public float camY = 12;
     public float camZ = -6;
     public float ang = 0;
-
-	// Use this for initialization
-	void Start () {
+    
+	void Start ()
+    {
         _playertransform = GameObject.FindGameObjectWithTag("Player").transform;
         _maincamera = GetComponent<Camera>();
         _cameras = GameObject.FindObjectsOfType<Camera>().ToList<Camera>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-        _playertransform = GameObject.FindGameObjectWithTag("Player").transform;
-        //_maincamera.transform.rotation = Quaternion.LookRotation(_playertransform.forward);
+	void Update ()
+    {
+        _playertransform = GameObject.FindGameObjectWithTag("Player").transform;     
     }
 
     private void FixedUpdate()
@@ -55,15 +53,6 @@ public class MainCameraBehaviour : MonoBehaviour {
         Vector3 calc_offset = new Vector3(0, camY, camZ);
         offset += calc_offset;
         _maincamera.transform.position = offset;
-        _maincamera.transform.rotation = Quaternion.AngleAxis(ang, Vector3.right);
-
-
-        //ROTATE CAMERA, FOWARD SHOULD BE THE PLAYER'S FOWARD
-        //if(Input.GetKeyDown(KeyCode.G))
-        //{
-        //    _maincamera.transform.rotation = Quaternion.LookRotation(_playertransform.forward);
-        //}
-        //_maincamera.transform.rotation = _playertransform.localRotation;
-        //_maincamera.transform.rotation = Quaternion.LookRotation(_playertransform.forward);
+        _maincamera.transform.rotation = Quaternion.AngleAxis(ang, Vector3.right);        
     }
 }
