@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 114789335809863270}
   - component: {fileID: 195800330513534014}
   - component: {fileID: 54037185296258070}
+  - component: {fileID: 136225129615422506}
   m_Layer: 0
   m_Name: TowerAttacker
   m_TagString: Enemy
@@ -1786,6 +1787,19 @@ MonoBehaviour:
   EnemyAnimator: {fileID: 95068772973944118}
   _location: {fileID: 4840703163115674}
   otherAmmo: {fileID: 0}
+--- !u!136 &136225129615422506
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052472891115440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.46
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.62, z: 0}
 --- !u!137 &137155740529140618
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

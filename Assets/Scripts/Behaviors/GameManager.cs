@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,10 +16,12 @@ public class GameManager : MonoBehaviour
     #region //MEMBER VARIABLES
     private GameObject _buttonpanel;
     private GameObject _gameinfopanel;
+    public GameObject HealthPack;
 
     public List<Transform> EnemySpawn;
     public Transform PayloadSpawn;
     public Transform PlayerSpawn;
+    public Transform HealthPackSpawn;
 
     private float _roundTimer;
     private float _spawnTimer;
@@ -64,6 +67,11 @@ public class GameManager : MonoBehaviour
         _payload.GetComponent<Rigidbody>().isKinematic = true;
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("3.mainmenu");
+    }
+
     private void ResumeGame()
     {
         var _player = GameObject.FindGameObjectWithTag("Player");
@@ -101,10 +109,10 @@ public class GameManager : MonoBehaviour
         //IF ANY ENEMIES LEFT, GATHER AND DELETE
         //INCREMENT ROUND NUMBER
         //RESET PLAYER POSITION TO 'PLAYERSPAWN'
-        
 
         _roundCounter += 1;
         _spawnTimer = 0.0f;
+        _roundTimer = 0.0f;
         minuteCounter = 0;
         _enemyLimit += 1;
         _enemySpawnCap += 10;
@@ -127,7 +135,14 @@ public class GameManager : MonoBehaviour
             var player = GameObject.FindGameObjectWithTag("Player");
             player.transform.position = PlayerSpawn.position;
             player.transform.rotation = PlayerSpawn.rotation;
-        }        
+        }
+
+        var player_maxheal = GameObject.FindGameObjectWithTag("Player");
+        var tower_maxheal = GameObject.FindGameObjectWithTag("Tower");
+        player_maxheal.GetComponent<PlayerBehaviour>()._player.MaxHealth += 20;
+        tower_maxheal.GetComponent<TowerBehaviour>()._tower.MaxHealth += 25;
+
+        var healthpack = Instantiate(HealthPack, HealthPackSpawn.position, HealthPackSpawn.rotation);
 
         Time.timeScale = 1.0f;
     }
@@ -221,7 +236,7 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer += Time.deltaTime;
 
-            if (minuteCounter == 5)
+            if (minuteCounter == 3)
             {
                 Debug.Log("GOTO NEXT ROUND");
                 NextRound();
@@ -236,13 +251,7 @@ public class GameManager : MonoBehaviour
                     _enemies.Remove(_enemies[i]);
                 }
             }
-
-            if (_enemies.Count <= 0)
-            {
-                Debug.Log("GOTO NEXT ROUND");
-                //NextRound();
-            }
-
+            
             //PAUSE THE GAME
             if (Input.GetKey("joystick button 7"))
             {
@@ -325,10 +334,11 @@ public class GameManager : MonoBehaviour
         _enemiesSpawned = 0;
         _enemiesLeft = _enemySpawnCap;
         _spawnIndex = 0;
-        _roundTimer = Time.time;
-        _spawnTimer = Time.time;
+        _roundTimer = 0.0f;
+        _spawnTimer = 0.0f;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
         _gameinfopanel = GameObject.FindGameObjectWithTag("GameInfoPanel");
+        var healthpack = Instantiate(HealthPack, HealthPackSpawn.position, HealthPackSpawn.rotation);
         _buttonpanel.SetActive(false);
     }
 

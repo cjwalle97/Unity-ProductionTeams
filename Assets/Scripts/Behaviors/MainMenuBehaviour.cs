@@ -10,7 +10,7 @@ public class MainMenuBehaviour : MonoBehaviour
     public Text ArtistsText;
     public Text ProgrammersText;
 
-    void Start()
+    private void Start()
     {
         ControlsText.text = "";
         ArtistsText.text = "";
@@ -19,7 +19,7 @@ public class MainMenuBehaviour : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("0.main", LoadSceneMode.Additive);
+        SceneManager.LoadScene("0.main");
         DestroyImmediate(gameObject);
     }
 
