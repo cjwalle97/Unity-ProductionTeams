@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class PlayerBehaviour : MonoBehaviour
 {
     #region //MEMEBER VARIABLES
-    [HideInInspector]
     public Player _player;
     public float PlayerHealth = 100;
     public float PlayerMaxHealth = 100;
@@ -18,9 +17,10 @@ public class PlayerBehaviour : MonoBehaviour
     public float BulletSpeed = 20;
     private Transform _bulletspawn;
     private Animator _animator;
-
-    //SETUP EVENT FOR PLAYER HEALTH CHANGE
-    [System.Serializable, HideInInspector]
+    private float deathCounter = 0;
+    private int deathCount = 0;
+    
+    [System.Serializable]
     public class OnPlayerHealthChange : UnityEvent<float> { }
     public OnPlayerHealthChange onPlayerHealthChange;
     #endregion
@@ -35,15 +35,9 @@ public class PlayerBehaviour : MonoBehaviour
         //var _hori = Input.GetAxis("HorizontalArrow");
         //var _vert = Input.GetAxis("VerticalArrow");
 
-        //_animator.SetFloat("AimMovement", Mathf.Abs(_hori));
-        //_animator.SetFloat("AimMovement", Mathf.Abs(_vert));
-
         _animator.SetFloat("AimMovement", Mathf.Abs(_hori) + Mathf.Abs(_vert));
 
-        //Debug.Log(_hori);
-
         Vector3 _direction = new Vector3(_hori, 0, _vert);
-
         return _direction.normalized;
     }
 
@@ -56,30 +50,22 @@ public class PlayerBehaviour : MonoBehaviour
         //WSAD CONTROLL
         //var h = Input.GetAxis("Horizontal");
         //var v = Input.GetAxis("Vertical");
-
-        //_animator.SetFloat("WalkMovement", Mathf.Abs(h));
-        //_animator.SetFloat("WalkMovement", Mathf.Abs(v));
-
+        
         _animator.SetFloat("WalkMovement", Mathf.Abs(h) + Mathf.Abs(v));
 
         Vector3 _direction = new Vector3(h, 0, v);
-
         return _direction.normalized;
     }
-
-    public float shotCooldown = 1f;
+    
     void Shoot()
     {
-        //3 ROUND BURST
         _animator.SetBool(AIMSHOOT, true);
     }
+
     public int AIMSHOOT = Animator.StringToHash("Shooting");
     void Death()
     {
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        SceneManager.LoadScene("4.gameover");
-        //this.enabled = false;
+        SceneManager.LoadScene("4.gameover");     
     }
 
     bool CheckIfAlive()
@@ -87,28 +73,13 @@ public class PlayerBehaviour : MonoBehaviour
         if(_player.Health <= 0.0f)
         {
             _player.Alive = false;
+            deathCounter += Time.deltaTime;
             return false;
         }
         return true;
     }
-
-    //RESEARCH THIS
+    
     bool canshoot, shooting;
-    IEnumerator ShotCooldown(float timer)
-    {
-        if (shooting)
-            yield return null;
-        shooting = true;
-        var countdown = timer;
-        
-        while (countdown >= 0)
-        {
-            countdown -= Time.deltaTime;
-            yield return null;
-        }
-        shooting = false;
-    }
-
     public void ShotFire()
     {
         var _bullet = Instantiate(Ammunition, _bulletspawn.position, _bulletspawn.rotation);
@@ -116,36 +87,36 @@ public class PlayerBehaviour : MonoBehaviour
         Destroy(_bullet, 2.0f);
     }
 
-    // Use this for initialization
+    void Awake()
+    {
+        _player = ScriptableObject.CreateInstance<Player>();
+    }
+
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _player = ScriptableObject.CreateInstance<Player>();
         _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         _player.MaxHealth = PlayerMaxHealth;
         _player.Health = PlayerHealth;
         _player.Damage = PlayerDamage;
-        _player.Alive = true;
+        _player.Alive = true;        
     }
-
-    // Update is called once per frame
+    
     void Update()
-    {
-        //_bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
-        //SETUP MOVEMENT
-        //SETUP CAMERA FOR PLAYER
-        //var h = Input.GetAxis("Horizontal");
-        //var v = Input.GetAxis("Vertical");
-
-        //var hSpin = Input.GetAxis("HorizontalArrow");
-
-        //transform.position += new Vector3(h, 0, v);
-        //transform.Rotate(new Vector3(0, hSpin * 5, 0) * Time.deltaTime * _lookspeed);
-        
+    {   
         if(CheckIfAlive() == false)
         {
-            _animator.SetBool("Alive", false);
-            Death();
+            if(deathCount <= 0)
+            {
+                _animator.SetBool("Alive", false);
+            }
+
+            deathCount += 1;
+
+            if (deathCounter >= 3.0f)
+            {
+                Death();
+            }
         }
 
         _animator.SetBool("Alive", _player.Alive);
@@ -154,43 +125,48 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        var _rightTrigger = Input.GetAxis("JoyFire");
-
-        _animator.SetBool("Shooting", shooting);
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Shoot();
-        //}
-
-        //RESEARCH THIS
-        canshoot = _rightTrigger >= .5f;        
-        //if(canshoot && !shooting)
-        //{      
-        //    Shoot();
-        //}
-
-        if(LookAround() != Vector3.zero && canshoot)
+        if (_player.Alive == true)
         {
-            Shoot();
-        }
+            var _rightTrigger = Input.GetAxis("JoyFire");
 
-
-        if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
-        {
-            if(LookAround() == Vector3.zero) //CHECK IF THE PLAYER IS AIMING
+            var ylimit = transform.position.y;
+            if (ylimit > 0.0f)
             {
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
+                Vector3 sitdown = transform.position;
+                sitdown.y = 0.0f;
+                transform.position = sitdown;
             }
+
+            _animator.SetBool("Shooting", shooting);
+            
+            canshoot = _rightTrigger >= .5f;
+            if (canshoot && !shooting)
+            {
+                Shoot();
+            }
+
+            if (LookAround() != Vector3.zero && canshoot)
+            {
+                Shoot();
+            }
+
+            if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
+            {
+                if (LookAround() == Vector3.zero) //CHECK IF THE PLAYER IS AIMING
+                {
+                    MovementSpeed = 20f;
+                    transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
+                }
+                else
+                    MovementSpeed = 2f;
+            }
+
+            if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
+            {
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
+            }
+
+            transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;            
         }
-
-        if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
-        {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
-        }
-
-        transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;
-
-        //transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class TowerBehaviour : MonoBehaviour {
 
@@ -10,20 +11,28 @@ public class TowerBehaviour : MonoBehaviour {
     public float TowerMaxHealth;
     public float TowerHealth;
 
-    [System.Serializable, HideInInspector]
+    [System.Serializable]
     public class OnTowerHealthChange : UnityEvent<float> { };
     public OnTowerHealthChange onTowerHealthChange;
     #endregion
-
-    // Use this for initialization
-    void Start () {
+    void Awake()
+    {
         _tower = ScriptableObject.CreateInstance<Tower>();
+    }
+    
+    void Start ()
+    {   
         _tower.MaxHealth = TowerMaxHealth;
         _tower.Health = TowerHealth;
     }
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         onTowerHealthChange.Invoke(_tower.Health);
+
+        if(_tower.Health <= 0.0f)
+        {
+            SceneManager.LoadScene("4.gameover");
+        }
 	}
 }
