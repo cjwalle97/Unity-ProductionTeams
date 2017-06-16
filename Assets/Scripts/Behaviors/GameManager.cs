@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,6 +65,11 @@ public class GameManager : MonoBehaviour
         _payload.GetComponent<Rigidbody>().isKinematic = true;
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("3.mainmenu");
+    }
+
     private void ResumeGame()
     {
         var _player = GameObject.FindGameObjectWithTag("Player");
@@ -105,6 +111,7 @@ public class GameManager : MonoBehaviour
 
         _roundCounter += 1;
         _spawnTimer = 0.0f;
+        _roundTimer = 0.0f;
         minuteCounter = 0;
         _enemyLimit += 1;
         _enemySpawnCap += 10;
@@ -221,7 +228,7 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer += Time.deltaTime;
 
-            if (minuteCounter == 5)
+            if (minuteCounter == 1)
             {
                 Debug.Log("GOTO NEXT ROUND");
                 NextRound();
@@ -236,13 +243,7 @@ public class GameManager : MonoBehaviour
                     _enemies.Remove(_enemies[i]);
                 }
             }
-
-            if (_enemies.Count <= 0)
-            {
-                Debug.Log("GOTO NEXT ROUND");
-                //NextRound();
-            }
-
+            
             //PAUSE THE GAME
             if (Input.GetKey("joystick button 7"))
             {

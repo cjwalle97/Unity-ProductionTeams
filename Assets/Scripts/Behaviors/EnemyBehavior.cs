@@ -74,7 +74,7 @@ public class EnemyBehavior : MonoBehaviour
         if (EnemyConfig.Alive == false)
         {
             EnemyAnimator.SetBool("Alive", EnemyConfig.Alive);
-            Destroy(gameObject, 5f);
+            Destroy(gameObject, 3f);
         }
     }
     

@@ -10,20 +10,25 @@ public class TowerBehaviour : MonoBehaviour {
     public float TowerMaxHealth;
     public float TowerHealth;
 
-    [System.Serializable, HideInInspector]
+    [System.Serializable]
     public class OnTowerHealthChange : UnityEvent<float> { };
     public OnTowerHealthChange onTowerHealthChange;
     #endregion
-
+    void Awake()
+    {
+        _tower = ScriptableObject.CreateInstance<Tower>();
+    }
     // Use this for initialization
     void Start () {
-        _tower = ScriptableObject.CreateInstance<Tower>();
+        
         _tower.MaxHealth = TowerMaxHealth;
         _tower.Health = TowerHealth;
     }
 	
 	// Update is called once per frame
 	void Update () {
+
         onTowerHealthChange.Invoke(_tower.Health);
+
 	}
 }

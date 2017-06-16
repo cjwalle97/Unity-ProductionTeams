@@ -19,7 +19,7 @@ public class MainMenuBehaviour : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("0.main", LoadSceneMode.Additive);
+        SceneManager.LoadScene("0.main");
         DestroyImmediate(gameObject);
     }
 

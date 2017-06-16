@@ -343,7 +343,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.47386602
-        functionName: NewEvent
+        functionName: ShotFire
         data: 
         objectReferenceParameter: {fileID: 1561072581029764, guid: 44a733218486427449c0e668f9d4fbf3,
           type: 2}

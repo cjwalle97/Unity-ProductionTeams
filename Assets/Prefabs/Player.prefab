@@ -924,7 +924,6 @@ GameObject:
   - component: {fileID: 65309376742508436}
   - component: {fileID: 136317274552339766}
   - component: {fileID: 114572716338585308}
-  - component: {fileID: 195693035139003586}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1441,7 +1440,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4335950351829076}
-  - component: {fileID: 114175081549910458}
+  - component: {fileID: 114879246032965336}
   m_Layer: 0
   m_Name: BulletSpawn
   m_TagString: Untagged
@@ -3242,10 +3241,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &65309376742508436
 BoxCollider:
@@ -3300,18 +3299,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114175081549910458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1862337997743376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e592607b10b2e074cb527829da61398e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spawn: {fileID: 0}
 --- !u!114 &114572716338585308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3324,8 +3311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  PlayerHealth: 100
-  PlayerMaxHealth: 100
+  PlayerHealth: 150
+  PlayerMaxHealth: 150
   PlayerDamage: 25
   Ammunition: {fileID: 1651444318728354, guid: 3143a047c690ff64b9134458d1e8b618, type: 2}
   MovementSpeed: 20
@@ -3333,11 +3320,33 @@ MonoBehaviour:
   BulletSpeed: 30
   onPlayerHealthChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: UpdatePlayerUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: PlayerBehaviour+OnPlayerHealthChange, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  shotCooldown: 1
   AIMSHOOT: 1877016939
+--- !u!114 &114879246032965336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1862337997743376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e592607b10b2e074cb527829da61398e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawn: {fileID: 0}
 --- !u!136 &136317274552339766
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3350,7 +3359,7 @@ CapsuleCollider:
   m_Radius: 0.87
   m_Height: 2.58
   m_Direction: 1
-  m_Center: {x: 0, y: 1.61, z: 0}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!137 &137003451780583760
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -4445,24 +4454,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.20105061, y: -0.102241576, z: 0.0128263235}
     m_Extent: {x: 0.337249, y: 0.26076752, z: 0.3626477}
   m_DirtyAABB: 0
---- !u!195 &195693035139003586
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1561072581029764}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.44
-  m_Speed: 0
-  m_Acceleration: 0
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4

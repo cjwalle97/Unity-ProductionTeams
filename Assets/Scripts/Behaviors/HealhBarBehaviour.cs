@@ -7,10 +7,12 @@ using UnityEngine.Events;
 public class HealhBarBehaviour : MonoBehaviour
 {
     #region //MEMBER VARIABLES
-    private GameObject _player;
+    public GameObject _player;
+    [SerializeField]
     private Slider _playerHealth;
+    [SerializeField]
     private Slider _towerHealth;
-    private GameObject _tower;
+    public GameObject _tower;
     #endregion
 
     public void UpdatePlayerUI(float health)
@@ -26,23 +28,20 @@ public class HealhBarBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(gameObject.tag == "PlayerHealth")
-        {
-            _player = GameObject.FindGameObjectWithTag("Player");
-            _playerHealth = GetComponent<Slider>();
-            _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
-            _playerHealth.value = _player.GetComponent<PlayerBehaviour>()._player.Health;
-            _player.GetComponent<PlayerBehaviour>().onPlayerHealthChange.AddListener(UpdatePlayerUI);
-        }
-        
-        if(gameObject.tag == "TowerHealth")
-        {
-            _tower = GameObject.FindGameObjectWithTag("Tower");
-            _towerHealth = GetComponent<Slider>();
-            _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
-            _towerHealth.value = _tower.GetComponent<TowerBehaviour>()._tower.Health;
-            _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
-        }
+        //_player = GameObject.FindGameObjectWithTag("Player");
+        //_tower = GameObject.FindGameObjectWithTag("Tower");
+
+
+        _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
+        _playerHealth.value = _player.GetComponent<PlayerBehaviour>()._player.Health;
+        _player.GetComponent<PlayerBehaviour>().onPlayerHealthChange.AddListener(UpdatePlayerUI);
+
+
+
+        _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
+        _towerHealth.value = _tower.GetComponent<TowerBehaviour>()._tower.Health;
+        _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
+
     }
 
     // Update is called once per frame

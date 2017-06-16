@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerBehaviour : MonoBehaviour
 {
     #region //MEMEBER VARIABLES
-    [HideInInspector]
+    
     public Player _player;
     public float PlayerHealth = 100;
     public float PlayerMaxHealth = 100;
@@ -20,7 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Animator _animator;
 
     //SETUP EVENT FOR PLAYER HEALTH CHANGE
-    [System.Serializable, HideInInspector]
+    [System.Serializable]
     public class OnPlayerHealthChange : UnityEvent<float> { }
     public OnPlayerHealthChange onPlayerHealthChange;
     #endregion
@@ -66,8 +66,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         return _direction.normalized;
     }
-
-    public float shotCooldown = 1f;
+    
     void Shoot()
     {
         //3 ROUND BURST
@@ -91,36 +90,23 @@ public class PlayerBehaviour : MonoBehaviour
         }
         return true;
     }
-
-    //RESEARCH THIS
+    
     bool canshoot, shooting;
-    IEnumerator ShotCooldown(float timer)
-    {
-        if (shooting)
-            yield return null;
-        shooting = true;
-        var countdown = timer;
-        
-        while (countdown >= 0)
-        {
-            countdown -= Time.deltaTime;
-            yield return null;
-        }
-        shooting = false;
-    }
-
     public void ShotFire()
     {
         var _bullet = Instantiate(Ammunition, _bulletspawn.position, _bulletspawn.rotation);
         _bullet.GetComponent<Rigidbody>().velocity += _bulletspawn.forward * BulletSpeed;
         Destroy(_bullet, 2.0f);
     }
-
+    void Awake()
+    {
+        _player = ScriptableObject.CreateInstance<Player>();
+    }
     // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _player = ScriptableObject.CreateInstance<Player>();
+        
         _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         _player.MaxHealth = PlayerMaxHealth;
         _player.Health = PlayerHealth;
@@ -155,6 +141,14 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         var _rightTrigger = Input.GetAxis("JoyFire");
+        var ylimit = transform.position.y;
+
+        if (ylimit > 0.0f)
+        {
+            Vector3 sitdown = transform.position;
+            sitdown.y = 0.0f;
+            transform.position = sitdown;
+        }
 
         _animator.SetBool("Shooting", shooting);
 
@@ -180,8 +174,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if(LookAround() == Vector3.zero) //CHECK IF THE PLAYER IS AIMING
             {
+                MovementSpeed = 20f;
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
             }
+            else
+                MovementSpeed = 2f;
         }
 
         if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
