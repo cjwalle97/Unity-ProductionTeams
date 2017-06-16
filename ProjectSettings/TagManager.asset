@@ -23,6 +23,8 @@ TagManager:
   - JunkBullet
   - PlayerBullet
   - MainMenuSpawn
+  - OverlayPanel
+  - Title
   layers:
   - Default
   - TransparentFX

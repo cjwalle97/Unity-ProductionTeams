@@ -13,7 +13,8 @@ public class MainMenuBehaviour : MonoBehaviour
 
     private Transform _spawn;
     private GameObject _enemy;
-    private float _timer = 0.0f;   
+    private float _timer = 0.0f;
+    private GameObject _overlay;
 
     private void Start()
     {
@@ -22,6 +23,8 @@ public class MainMenuBehaviour : MonoBehaviour
         ProgrammersText.text = "";
         _spawn = GameObject.FindGameObjectWithTag("MainMenuSpawn").transform;
         _enemy = (GameObject)Instantiate(Resources.Load("RuntimePrefabs/TowerAttacker"), _spawn.position, _spawn.rotation);
+        _overlay = GameObject.FindGameObjectWithTag("OverlayPanel");
+        _overlay.SetActive(false);
     }
 
     public void StartGame()
@@ -50,22 +53,36 @@ public class MainMenuBehaviour : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if(_timer < 60.0f)//wait
+        if(_overlay.activeSelf == true)
         {
+            GameObject.FindGameObjectWithTag("Title").GetComponent<Text>().enabled = false;
+        }
+
+        if (_overlay.activeSelf == false)
+        {
+            GameObject.FindGameObjectWithTag("Title").GetComponent<Text>().enabled = true;
+        }
+
+        if (_timer < 30.0f)//wait
+        {
+            _overlay.SetActive(true);
             _enemy.GetComponent<NavMeshAgent>().isStopped = true;
         }
 
-        if(_timer >= 60.0f)//move
+        if(_timer >= 30.0f)//move
         {
+            _overlay.SetActive(false);
             _enemy.GetComponent<NavMeshAgent>().isStopped = false;            
         }
 
-        if (_timer >= 120.0f)//reset
+        if (_timer >= 80.0f)//reset
         {
             _enemy.GetComponent<EnemyBehavior>().EnemyConfig.Alive = false;
             _enemy = (GameObject)Instantiate(Resources.Load("RuntimePrefabs/TowerAttacker"), _spawn.position, _spawn.rotation);
             _timer = 0.0f;
             return;
         }
+
+        Debug.Log(_timer);
     }
 }

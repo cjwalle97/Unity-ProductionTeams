@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
     {
         _spawnTimer += Time.deltaTime;
 
-        if (_spawnTimer >= 12.0f && _enemiesSpawned != _enemySpawnCap)
+        if (_spawnTimer >= 6.0f && _enemiesSpawned != _enemySpawnCap)
         {
             //SPAWN MORE ENEMIES
             //SPAWN 1-4 IN ORDER
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer += Time.deltaTime;
 
-            if (minuteCounter == 3)
+            if (minuteCounter == 2)
             {
                 NextRound();
                 return true;
