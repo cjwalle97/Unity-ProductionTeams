@@ -18,6 +18,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float BulletSpeed = 20;
     private Transform _bulletspawn;
     private Animator _animator;
+    private float deathCounter = 0;
+    private int deathCount = 0;
 
     //SETUP EVENT FOR PLAYER HEALTH CHANGE
     [System.Serializable]
@@ -72,11 +74,10 @@ public class PlayerBehaviour : MonoBehaviour
         //3 ROUND BURST
         _animator.SetBool(AIMSHOOT, true);
     }
+
     public int AIMSHOOT = Animator.StringToHash("Shooting");
     void Death()
     {
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
         SceneManager.LoadScene("4.gameover");
         //this.enabled = false;
     }
@@ -86,6 +87,7 @@ public class PlayerBehaviour : MonoBehaviour
         if(_player.Health <= 0.0f)
         {
             _player.Alive = false;
+            deathCounter += Time.deltaTime;
             return false;
         }
         return true;
@@ -98,20 +100,21 @@ public class PlayerBehaviour : MonoBehaviour
         _bullet.GetComponent<Rigidbody>().velocity += _bulletspawn.forward * BulletSpeed;
         Destroy(_bullet, 2.0f);
     }
+
     void Awake()
     {
         _player = ScriptableObject.CreateInstance<Player>();
     }
+
     // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();
-        
         _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
         _player.MaxHealth = PlayerMaxHealth;
         _player.Health = PlayerHealth;
         _player.Damage = PlayerDamage;
-        _player.Alive = true;
+        _player.Alive = true;        
     }
 
     // Update is called once per frame
@@ -130,8 +133,16 @@ public class PlayerBehaviour : MonoBehaviour
         
         if(CheckIfAlive() == false)
         {
-            _animator.SetBool("Alive", false);
-            Death();
+            if(deathCount <= 0)
+            {
+                _animator.SetBool("Alive", false);
+            }
+            deathCount += 1;
+
+            if (deathCounter >= 3.0f)
+            {
+                Death();
+            }
         }
 
         _animator.SetBool("Alive", _player.Alive);
@@ -158,17 +169,17 @@ public class PlayerBehaviour : MonoBehaviour
         //}
 
         //RESEARCH THIS
-        canshoot = _rightTrigger >= .5f;        
-        //if(canshoot && !shooting)
-        //{      
-        //    Shoot();
-        //}
-
-        if(LookAround() != Vector3.zero && canshoot)
+        canshoot = _rightTrigger >= .5f;
+        canshoot = Input.GetKey(KeyCode.Space);
+        if (canshoot && !shooting)
         {
             Shoot();
         }
 
+        if (LookAround() != Vector3.zero && canshoot)
+        {
+            Shoot();
+        }
 
         if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
         {

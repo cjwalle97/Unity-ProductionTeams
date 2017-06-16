@@ -28,33 +28,30 @@ public class HealhBarBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //_player = GameObject.FindGameObjectWithTag("Player");
-        //_tower = GameObject.FindGameObjectWithTag("Tower");
-
-
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _tower = GameObject.FindGameObjectWithTag("Tower");
+        
         _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
         _playerHealth.value = _player.GetComponent<PlayerBehaviour>()._player.Health;
         _player.GetComponent<PlayerBehaviour>().onPlayerHealthChange.AddListener(UpdatePlayerUI);
 
-
-
         _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
         _towerHealth.value = _tower.GetComponent<TowerBehaviour>()._tower.Health;
         _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.tag == "PlayerHealth")
-        {
-            _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
-        }
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _tower = GameObject.FindGameObjectWithTag("Tower");
 
-        if (gameObject.tag == "TowerHealth")
-        {
-            _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
-        }
+        _playerHealth.maxValue = _player.GetComponent<PlayerBehaviour>()._player.MaxHealth;
+        _playerHealth.value = _player.GetComponent<PlayerBehaviour>()._player.Health;
+        _player.GetComponent<PlayerBehaviour>().onPlayerHealthChange.AddListener(UpdatePlayerUI);
+
+        _towerHealth.maxValue = _tower.GetComponent<TowerBehaviour>()._tower.MaxHealth;
+        _towerHealth.value = _tower.GetComponent<TowerBehaviour>()._tower.Health;
+        _tower.GetComponent<TowerBehaviour>().onTowerHealthChange.AddListener(UpdateTowerUI);
     }
 }

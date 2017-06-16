@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 224479068778782802}
   - component: {fileID: 222484712687090888}
   - component: {fileID: 114930562500994970}
+  - component: {fileID: 114570667916835980}
   m_Layer: 5
   m_Name: HealthPanel
   m_TagString: Untagged
@@ -723,7 +724,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764755866789728}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b76d098d7766af47bba6c51d28b8ccd, type: 3}
   m_Name: 
@@ -867,6 +868,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114570667916835980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258750697611832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b76d098d7766af47bba6c51d28b8ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _playerHealth: {fileID: 114390457944573210}
+  _towerHealth: {fileID: 114782099234480450}
+  _tower: {fileID: 0}
 --- !u!114 &114605299065669528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1653,7 +1669,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.3}
   m_AnchorMax: {x: 0.85625, y: 0.75000006}
-  m_AnchoredPosition: {x: -6.715, y: 24.600002}
+  m_AnchoredPosition: {x: -6.715, y: 24.6}
   m_SizeDelta: {x: -10.969998, y: -3.7999995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224592827618144220

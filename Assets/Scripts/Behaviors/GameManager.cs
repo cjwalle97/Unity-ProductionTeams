@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
     #region //MEMBER VARIABLES
     private GameObject _buttonpanel;
     private GameObject _gameinfopanel;
+    public GameObject HealthPack;
 
     public List<Transform> EnemySpawn;
     public Transform PayloadSpawn;
     public Transform PlayerSpawn;
+    public Transform HealthPackSpawn;
 
     private float _roundTimer;
     private float _spawnTimer;
@@ -107,7 +109,6 @@ public class GameManager : MonoBehaviour
         //IF ANY ENEMIES LEFT, GATHER AND DELETE
         //INCREMENT ROUND NUMBER
         //RESET PLAYER POSITION TO 'PLAYERSPAWN'
-        
 
         _roundCounter += 1;
         _spawnTimer = 0.0f;
@@ -134,7 +135,9 @@ public class GameManager : MonoBehaviour
             var player = GameObject.FindGameObjectWithTag("Player");
             player.transform.position = PlayerSpawn.position;
             player.transform.rotation = PlayerSpawn.rotation;
-        }        
+        }
+
+        var healthpack = Instantiate(HealthPack, HealthPackSpawn.position, HealthPackSpawn.rotation);
 
         Time.timeScale = 1.0f;
     }
@@ -228,7 +231,7 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer += Time.deltaTime;
 
-            if (minuteCounter == 1)
+            if (minuteCounter == 3)
             {
                 Debug.Log("GOTO NEXT ROUND");
                 NextRound();
