@@ -10,7 +10,7 @@ public class MainMenuBehaviour : MonoBehaviour
     public Text ArtistsText;
     public Text ProgrammersText;
 
-    void Start()
+    private void Start()
     {
         ControlsText.text = "";
         ArtistsText.text = "";

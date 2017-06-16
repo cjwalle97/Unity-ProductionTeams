@@ -151,54 +151,54 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        var _rightTrigger = Input.GetAxis("JoyFire");
-        var ylimit = transform.position.y;
-
-        if (ylimit > 0.0f)
+        if (_player.Alive == true)
         {
-            Vector3 sitdown = transform.position;
-            sitdown.y = 0.0f;
-            transform.position = sitdown;
-        }
+            var _rightTrigger = Input.GetAxis("JoyFire");
 
-        _animator.SetBool("Shooting", shooting);
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Shoot();
-        //}
-
-        //RESEARCH THIS
-        canshoot = _rightTrigger >= .5f;
-        canshoot = Input.GetKey(KeyCode.Space);
-        if (canshoot && !shooting)
-        {
-            Shoot();
-        }
-
-        if (LookAround() != Vector3.zero && canshoot)
-        {
-            Shoot();
-        }
-
-        if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
-        {
-            if(LookAround() == Vector3.zero) //CHECK IF THE PLAYER IS AIMING
+            var ylimit = transform.position.y;
+            if (ylimit > 0.0f)
             {
-                MovementSpeed = 20f;
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
+                Vector3 sitdown = transform.position;
+                sitdown.y = 0.0f;
+                transform.position = sitdown;
             }
-            else
-                MovementSpeed = 2f;
+
+            _animator.SetBool("Shooting", shooting);
+
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    Shoot();
+            //}
+
+            canshoot = _rightTrigger >= .5f;
+            if (canshoot && !shooting)
+            {
+                Shoot();
+            }
+
+            if (LookAround() != Vector3.zero && canshoot)
+            {
+                Shoot();
+            }
+
+            if (MoveAround() != Vector3.zero) //CHECK IF THE PLAYER IS MOVING
+            {
+                if (LookAround() == Vector3.zero) //CHECK IF THE PLAYER IS AIMING
+                {
+                    MovementSpeed = 20f;
+                    transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MoveAround()), Time.deltaTime * LookSpeed);
+                }
+                else
+                    MovementSpeed = 2f;
+            }
+
+            if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
+            {
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
+            }
+
+            transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;
+            //transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
         }
-
-        if (LookAround() != Vector3.zero) // CHECKING IF THE ARROW INPUTS ARE ZERO, WILL LOCK PLAYER ROTATION ON RELEASE
-        {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
-        }
-
-        transform.localPosition += MoveAround() * MovementSpeed * Time.deltaTime;
-
-        //transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(LookAround()), Time.deltaTime * LookSpeed);
     }
 }

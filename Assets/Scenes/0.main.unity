@@ -245,6 +245,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1561072581029764, guid: 44a733218486427449c0e668f9d4fbf3,
     type: 2}
   m_PrefabInternal: {fileID: 1694994428}
+--- !u!4 &788707852 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4875116674567676, guid: 574e0fb2812a38044a70a316993cc32e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196084933}
 --- !u!1001 &1196084933
 Prefab:
   m_ObjectHideFlags: 0
@@ -283,11 +288,6 @@ Prefab:
     - target: {fileID: 4183109420446560, guid: 574e0fb2812a38044a70a316993cc32e, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114283060678998300, guid: 574e0fb2812a38044a70a316993cc32e,
-        type: 2}
-      propertyPath: onTowerHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 574e0fb2812a38044a70a316993cc32e, type: 2}
@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8bb1c0cd5c7fb44ab366c3127668bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthPack: {fileID: 1982499822183178, guid: cc78401de9dc8c8448524e0d4d518d98, type: 2}
   EnemySpawn:
   - {fileID: 1196084934}
   - {fileID: 1196084935}
@@ -470,6 +471,7 @@ MonoBehaviour:
   - {fileID: 1196084938}
   PayloadSpawn: {fileID: 1196084935}
   PlayerSpawn: {fileID: 1699353494}
+  HealthPackSpawn: {fileID: 788707852}
 --- !u!4 &1632400661
 Transform:
   m_ObjectHideFlags: 0
@@ -521,11 +523,6 @@ Prefab:
     - target: {fileID: 4735024576691038, guid: 44a733218486427449c0e668f9d4fbf3, type: 2}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114572716338585308, guid: 44a733218486427449c0e668f9d4fbf3,
-        type: 2}
-      propertyPath: onPlayerHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44a733218486427449c0e668f9d4fbf3, type: 2}
@@ -762,7 +759,7 @@ Prefab:
     - target: {fileID: 224328933024897194, guid: ff38692832380b5478dcb43cea3819f5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224644727540840156, guid: ff38692832380b5478dcb43cea3819f5,
         type: 2}
@@ -782,7 +779,7 @@ Prefab:
     - target: {fileID: 224644727540840156, guid: ff38692832380b5478dcb43cea3819f5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -85
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff38692832380b5478dcb43cea3819f5, type: 2}

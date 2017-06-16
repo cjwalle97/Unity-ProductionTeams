@@ -137,6 +137,11 @@ public class GameManager : MonoBehaviour
             player.transform.rotation = PlayerSpawn.rotation;
         }
 
+        var player_maxheal = GameObject.FindGameObjectWithTag("Player");
+        var tower_maxheal = GameObject.FindGameObjectWithTag("Tower");
+        player_maxheal.GetComponent<PlayerBehaviour>()._player.MaxHealth += 20;
+        tower_maxheal.GetComponent<TowerBehaviour>()._tower.MaxHealth += 25;
+
         var healthpack = Instantiate(HealthPack, HealthPackSpawn.position, HealthPackSpawn.rotation);
 
         Time.timeScale = 1.0f;
@@ -329,10 +334,11 @@ public class GameManager : MonoBehaviour
         _enemiesSpawned = 0;
         _enemiesLeft = _enemySpawnCap;
         _spawnIndex = 0;
-        _roundTimer = Time.time;
-        _spawnTimer = Time.time;
+        _roundTimer = 0.0f;
+        _spawnTimer = 0.0f;
         _buttonpanel = GameObject.FindGameObjectWithTag("ButtonPanel");
         _gameinfopanel = GameObject.FindGameObjectWithTag("GameInfoPanel");
+        var healthpack = Instantiate(HealthPack, HealthPackSpawn.position, HealthPackSpawn.rotation);
         _buttonpanel.SetActive(false);
     }
 
