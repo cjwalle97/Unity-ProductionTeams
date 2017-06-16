@@ -96,6 +96,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
+        if(Ammunition == null)
+        {
+            Ammunition = (GameObject)Resources.Load("RuntimePrefabs/PlayerBulletPrefab");
+        }
         _player.MaxHealth = PlayerMaxHealth;
         _player.Health = PlayerHealth;
         _player.Damage = PlayerDamage;
@@ -103,8 +107,9 @@ public class PlayerBehaviour : MonoBehaviour
     }
     
     void Update()
-    {   
-        if(CheckIfAlive() == false)
+    {
+        _bulletspawn = GetComponentInChildren<PlayerBulletSpawnBehaviour>().Spawn;
+        if (CheckIfAlive() == false)
         {
             if(deathCount <= 0)
             {
